@@ -6,7 +6,7 @@
 
 ## Minimum Viable Product
 
-Slamk is a web application inspired by Slack that will be built using Ruby on Rails and React.js.  By the end of Week 9, this app will, at a minimum, satisfy the following criteria:
+Slamk is a web application inspired by Slack that will be built using Ruby on Rails, React.js and WebSockets.  By the end of Week 9, this app will, at a minimum, satisfy the following criteria:
 
 - [ ] Hosting on Heroku
 - [ ] New account creation, login, and guest/demo login
@@ -19,7 +19,6 @@ Slamk is a web application inspired by Slack that will be built using Ruby on Ra
 - [ ] Direct Message
   - [ ] Single or Multi-Person Direct Message
 - [ ] User profile editing
-- [ ] Invite others to join Team Site
 - [ ] Smooth, bug-free navigation
 - [ ] Adequate seed data to demonstrate the site's features
 - [ ] CSS styling that is satisfactorily visually appealing

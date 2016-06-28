@@ -22,11 +22,11 @@ _**exactly**_ match the nesting of your routes.)
 ## Routes
 
 * **component:** `App` **path:** `/`
-  * **component:** `NotesIndex` **path:** index
-  * **component:** `NotesIndex` **path:** `notebooks/:notebookId`
-    * **component:** `NoteDetail` **path:** `notes/:noteId`
-  * **component:** `NotesIndex` **path:** none
-    * **component:** `NoteDetail` **path:** `notes/:noteId`
+  * **component:** `Navigation` **path:** index
+    * **component:** `Room` **path:** `notebooks/:notebookId`
+      * **component:** `NoteDetail` **path:** `notes/:noteId`
+    * **component:** `NotesIndex` **path:** none
+      * **component:** `NoteDetail` **path:** `notes/:noteId`
 
 For Routes that have no `notebookId`, `NotesIndex` will render all
 notes.
