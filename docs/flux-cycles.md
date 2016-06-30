@@ -79,7 +79,7 @@ what you'll need to do.
   0. `PATCH /api/rooms/:id` is called.
   0. `receiveSingleRoom` is set as the callback.
 
-* `joinRoom` (select from all channels only)
+* `joinRoom` (select from all not-yet-joined channels only)
   0. invoked from join button `onClick`
   0. `POST /api/room_users` is called.
   0. `receiveSingleRoom` is set as the callback.
