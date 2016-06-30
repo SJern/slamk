@@ -12,108 +12,108 @@ because once you start implementing your flux loops, that's precisely
 what you'll need to do.
 
 
-## Note Cycles
+## Message Cycles
 
-### Notes API Request Actions
+### Messages API Request Actions
 
-* `fetchAllNotes`
-  0. invoked from `NotesIndex` `didMount`/`willReceiveProps`
-  0. `GET /api/notes` is called.
-  0. `receiveAllNotes` is set as the callback.
+* `fetchRoomMessages`
+  0. invoked from `MessagesIndex` `didMount`/`willReceiveProps`
+  0. `GET /api/messages` is called.
+  0. `receiveRoomMessages` is set as the callback.
 
-* `createNote`
-  0. invoked from new note button `onClick`
-  0. `POST /api/notes` is called.
-  0. `receiveSingleNote` is set as the callback.
+* `createMessage`
+  0. invoked from `Submission` `onKeyUp` when `event.keyCode === 13`
+  0. `POST /api/messages` is called.
+  0. `receiveSingleMessage` is set as the callback.
 
-* `fetchSingleNote`
-  0. invoked from `NoteDetail` `didMount`/`willReceiveProps`
-  0. `GET /api/notes/:id` is called.
-  0. `receiveSingleNote` is set as the callback.
+* `updateMessage`
+  0. invoked from `MessageForm` `onSubmit`
+  0. `PATCH /api/messages/:id` is called.
+  0. `receiveSingleMessage` is set as the callback.
 
-* `updateNote`
-  0. invoked from `NoteForm` `onSubmit`
-  0. `POST /api/notes` is called.
-  0. `receiveSingleNote` is set as the callback.
+* `destroyMessage`
+  0. invoked from delete message button `onClick`
+  0. `DELETE /api/messages/:id` is called.
+  0. `removeMessage` is set as the callback.
 
-* `destroyNote`
-  0. invoked from delete note button `onClick`
-  0. `DELETE /api/notes/:id` is called.
-  0. `removeNote` is set as the callback.
+### Messages API Response Actions
 
-### Notes API Response Actions
-
-* `receiveAllNotes`
+* `receiveRoomMessages`
   0. invoked from an API callback.
-  0. `Note` store updates `_notes` and emits change.
+  0. `Message` store updates `_messages` and emits change.
 
-* `receiveSingleNote`
+* `receiveSingleMessage`
   0. invoked from an API callback.
-  0. `Note` store updates `_notes[id]` and emits change.
+  0. `Message` store updates `_messages[id]` and emits change.
 
-* `removeNote`
+* `removeMessage`
   0. invoked from an API callback.
-  0. `Note` store removes `_notes[id]` and emits change.
+  0. `Message` store removes `_messages[id]` and emits change.
 
 ### Store Listeners
 
-* `NotesIndex` component listens to `Note` store.
-* `NoteDetail` component listens to `Note` store.
+* `MessagesIndex` component listens to `Message` store.
 
 
-## Notebook Cycles
+## Room Cycles
 
-### Notebooks API Request Actions
+### Rooms API Request Actions
 
-* `fetchAllNotebooks`
-  0. invoked from `NotebooksIndex` `didMount`/`willReceiveProps`
-  0. `GET /api/notebooks` is called.
-  0. `receiveAllNotebooks` is set as the callback.
+* `fetchAllRooms`
+  0. invoked from `RoomsIndex` `didMount`/`willReceiveProps`
+  0. `GET /api/rooms` is called.
+  0. `receiveAllRooms` is set as the callback.
 
-* `createNotebook`
-  0. invoked from new notebook button `onClick`
-  0. `POST /api/notebooks` is called.
-  0. `receiveSingleNotebook` is set as the callback.
+* `createRoom`
+  0. invoked from new room button `onClick`
+  0. `POST /api/rooms` is called.
+  0. `receiveSingleRoom` is set as the callback.
 
-* `fetchSingleNotebook`
-  0. invoked from `NotebookDetail` `didMount`/`willReceiveProps`
-  0. `GET /api/notebooks/:id` is called.
-  0. `receiveSingleNotebook` is set as the callback.
+* `fetchSingleRoom`
+  0. invoked from `Room` `didMount`/`willReceiveProps`
+  0. `GET /api/rooms/:id` is called.
+  0. `receiveSingleRoom` is set as the callback.
 
-* `updateNotebook`
-  0. invoked from `NotebookForm` `onSubmit`
-  0. `POST /api/notebooks` is called.
-  0. `receiveSingleNotebook` is set as the callback.
+* `updateRoom` (basically add members to room or change title)
+  0. invoked from `RoomForm` `onSubmit`
+  0. `PATCH /api/rooms/:id` is called.
+  0. `receiveSingleRoom` is set as the callback.
 
-* `destroyNotebook`
-  0. invoked from delete notebook button `onClick`
-  0. `DELETE /api/notebooks/:id` is called.
-  0. `removeNotebook` is set as the callback.
+* `joinRoom` (select from all channels only)
+  0. invoked from join button `onClick`
+  0. `POST /api/room_users` is called.
+  0. `receiveSingleRoom` is set as the callback.
+
+* `destroyRoom` (not literally destroying unless 0 member, usually just removing a room_user row)
+  0. invoked from delete room button `onClick`
+  0. `DELETE /api/rooms/:id` is called if 0 member.
+  0. `DELETE /api/room_users/:id` is called otherwise. (How to get id in the first place???)
+  0. `removeRoom` is set as the callback.
 
 ### Notebooks API Response Actions
 
-* `receiveAllNotebooks`
+* `receiveAllRooms`
   0. invoked from an API callback.
-  0. `Notebook` store updates `_notebooks` and emits change.
+  0. `Room` store updates `_rooms` and emits change.
 
-* `receiveSingleNotebook`
+* `receiveSingleRoom`
   0. invoked from an API callback.
-  0. `Notebook` store updates `_notebooks[id]` and emits change.
+  0. `Room` store updates `_rooms[id]` and emits change.
 
-* `removeNotebook`
+* `removeRoom`
   0. invoked from an API callback.
-  0. `Notebook` store removes `_notebooks[id]` and emits change.
+  0. `Room` store removes `_rooms[id]` and emits change.
 
 ### Store Listeners
 
-* `NotebooksIndex` component listens to `Notebook` store.
+* `RoomsIndex` component listens to `Room` store.
 
 
 ## SearchSuggestion Cycles
 
 * `fetchSearchSuggestions`
-  0. invoked from `NoteSearchBar` `onChange` when there is text
-  0. `GET /api/notes` is called with `text` param.
+  0. invoked from `RoomSearchBar` `onChange` when there is text
+  0. `GET /api/rooms` is called with `text` param.
   0. `receiveSearchSuggestions` is set as the callback.
 
 * `receiveSearchSuggestions`
@@ -121,7 +121,7 @@ what you'll need to do.
   0. `SearchSuggestion` store updates `_suggestions` and emits change.
 
 * `removeSearchSuggestions`
-  0. invoked from `NoteSearchBar` `onChange` when empty
+  0. invoked from `RoomSearchBar` `onChange` when empty
   0. `SearchSuggestion` store resets `_suggestions` and emits change.
 
 ### Store Listeners
