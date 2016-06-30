@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   before_validation :ensure_session_token_uniqueness
 
   has_many :messages
-  has_many :room_users,
+  has_many :room_users
   has_many :rooms,
   	through: :room_users,
   	source: :room
