@@ -1,22 +1,46 @@
 # View Wireframes
 
-## New User
-![new-user]
+## Splash
+![splash]
 
-## New Session
-![new-session]
+## Chat with notes
+![chat-notes]
 
-## Channel
-![channel]
+## Chat
+![chat]
 
-## NotebooksIndex / NotebookIndexItem
-![notebooks]
+## Overview
+![overview]
 
-## NotebookForm
-![notebook-form]
+## Navigation
+![navigation]
 
-[new-user]: ./wireframes/new_user.png
-[new-session]: ./wireframes/new_session.png
-[channel]: ./wireframes/channel_wireframe.png
-[notebooks]: ./wireframes/root_notebooks.png
-[notebook-form]: ./wireframes/notebook_form.png
+## Menu
+![menu]
+
+## RoomsIndex
+![rooms_index]
+
+## Room
+![room]
+
+## Toolbar
+![toolbar]
+
+## MessageIndexItem
+![message_index_item]
+
+## Submission
+![submission]
+
+[splash]: ./wireframes/splash.jpg
+[chat-notes]: ./wireframes/chat_notes.jpg
+[chat]: ./wireframes/chat.png
+[overview]: ./wireframes/overview.jpg
+[navigation]: ./wireframes/navigation.jpg
+[menu]: ./wireframes/menu.jpg
+[rooms_index]: ./wireframes/rooms_index.jpg
+[room]: ./wireframes/room.jpg
+[toolbar]: ./wireframes/toolbar.jpg
+[message_index_item]: ./wireframes/message_index_item.jpg
+[submission]: ./wireframes/submission.jpg

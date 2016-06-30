@@ -1,5 +1,10 @@
 ## Component Hierarchy
 
+## Components
+![components]
+
+[components]: ./components/components.jpg
+
 **Bolded** components are associated with routes.
 
 (:exclamation: Remember, the bolded components are created by their
