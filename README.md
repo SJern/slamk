@@ -24,7 +24,7 @@ Slamk is a web application inspired by Slack that will be built using Ruby on Ra
 - [ ] CSS styling that is satisfactorily visually appealing
 
 ![channel]
-[channel]: ./docs/wireframes/channel_wireframe.png
+[channel]: ./docs/wireframes/chat.png
 
 ## Design Docs
 * [View Wireframes][views]
@@ -41,30 +41,41 @@ Slamk is a web application inspired by Slack that will be built using Ruby on Ra
 
 ## Implementation Timeline
 
-### Phase 1: User Authentication & Team Site Creation (~1 day)
-I will implement user authentication in Rails based on the practices learned at App Academy. By the end of this phase, users will be able to log in & start or see their a team sites and create channels. The most important part of this phase will be pushing the app to Heroku and ensuring that everything works before moving on to phase 2.
+### Phase 1: User Front-end Authentication (~2 day)
+I will implement user authentication in Rails based on the practices learned at App Academy. By the end of this phase, users will be able to log in to create or join channels. They will also be able to log in as guests. The most important part of this phase will be pushing the app to Heroku and ensuring that everything works before moving on to phase 2.
+- [ ] Splash Component
+- [ ] Rails User JSON API
+- [ ] Front-end Auth
+- [ ] Guest Demo Login
+- [ ] CSS styling
 
-### Phase 2: Channel & Message Creation & Posting (3 days)
-I will begin to add API routes to serve JSON and begin building the app as a single page backbone application. The first step to be able to post messages and have messages belong to a channel or to a conversation between two people. By the end of this phase, users will be able to join or create channels and conversations and then post and read the messages that belong to those conversations.
+### Phase 2: Live-Chat (3 days)
+I will begin to add API routes to serve JSON and begin building the app as a single-page application. The first step is to implement live chats by using Pusher/WebSockets and have messages belong to different rooms. Some of these rooms will be channels and some will be direct-message rooms. By the end of this phase, users will be able to send and receive messages in real-time.
+- [ ] Use Pusher to implement live chats
+- [ ] Style live-chat/Room component
 
-### Phase 3: Files and formatted messages (2 days)
-In this phase I will use third party libraries to improve both the displaying and creation of messages. I will allow messages to be formatted by using a Markdown editor for my MessageForm and I will need to make sure Markdown is escaped in the MessageShow. I will also use Filepicker to be able to upload files to channels and conversations.
+### Phase 3: Navigation and Room Creation (2 days)
+In this phase I will add the Navigation component so that users can join or create channels and can create direct-message rooms. They will be able to post and read the messages in rooms that they are members of. By the end of this phase, users will be able to switch between channels and direct-message rooms. They will also be able to log out from there.
+- [ ] Create Navigation component
+- [ ] Style Navigation component
+- [ ] Add Menu component to the top of the Navigation component
 
-### Phase 4: Search for Messages (2 days)
-In this phase I will need to add search routes to the Message controller. On the backbone side, there will be a SearchResults composite view that has MessageShow subview. This view will look similar to the channel composite view.  
+### Phase 4: Seed Data and Final Styling (1 days)
+In this phase I will seed adequate amount of data to demonstrate the site's features. I will spend time to work on CSS styling to give the site a professional look.
 
-### Phase 5: Scrolling (2 days)
-In this phase, I will need to make the feed act the way Slack's feed does. Messages start at the bottom and work their way up. If there aren't enough messages, the feed is aligned to the bottom of the page. Also a scroll up should fetch more messages with pagination that the user doesn't notice.
+### Phase 5: Production README and Bonuses (2 day)
+I will replace this README with a production README. I will also give users the ability to edit their profile, to add reactions and files to messages in chat rooms they are members of.
+- [ ] Production README
+- [ ] Show and Edit User Profile
+- [ ] Add Reactions to messages
+- [ ] Attach files to messages
 
 ### Bonus Features
+- [ ] search-bar/auto-completion for users and rooms
+- [ ] file uploads
+- [ ] reactions
 - [ ] infinite scroll
-- [ ] OAuth in Facebook & Twitter
-- [ ] conversation show in a single SQL query rather than 4
-- [ ] searching fetches the context (the two messages before and after the
-  message that contains the search phrase).
 - [ ] User avatars
-- [ ] Typeahead search bar
-- [ ] mentions can be made without using @ and searching for the username in text
 
 [phase-one]: docs/phases/phase1.md
 [phase-two]: docs/phases/phase2.md
