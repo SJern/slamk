@@ -9,6 +9,8 @@ const hashHistory = ReactRouter.hashHistory;
 
 
 
+window.SessionApiUtil = require('./util/session_api_util');
+
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('content');
   ReactDOM.render(<h1>Hello lalala</h1>, root);
