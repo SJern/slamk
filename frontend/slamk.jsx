@@ -7,11 +7,21 @@ const Route = ReactRouter.Route;
 const IndexRoute = ReactRouter.IndexRoute;
 const hashHistory = ReactRouter.hashHistory;
 
+const App = require('./components/app');
+const Splash = require('./components/splash');
+
+const appRouter = (
+  <Router history={ hashHistory }>
+    <Route path="/" component={ App }>
+      <IndexRoute component={ Splash } />
+    </Route>
+  </Router>
+);
 
 
-window.SessionApiUtil = require('./util/session_api_util');
+
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('content');
-  ReactDOM.render(<h1>Hello lalala</h1>, root);
+  ReactDOM.render(appRouter, root);
 });

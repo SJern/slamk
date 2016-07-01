@@ -36,20 +36,6 @@ const SessionApiUtil = {
 				error("signup", errors);
 			}
 		});
-	},
-
-	fetchCurrentUser(success, complete) {
-		$.ajax({
-			url: '/api/session',
-			method: 'GET',
-			success,
-			error: function (xhr) {
-			  console.log("Error in SessionApiUtil#fetchCurrentUser");
-			},
-      complete: function(){
-				complete();
-			}
-		});
 	}
 };
 
