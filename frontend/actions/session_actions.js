@@ -18,6 +18,11 @@ const SessionActions = {
       ErrorActions.setErrors);
   },
 
+  demoIn() {
+    SessionApiUtil.demoIn(this.receiveCurrentUser,
+    ErrorActions.setErrors);
+  },
+
   logOut() {
     SessionApiUtil.logOut(this.removeCurrentUser);
   },

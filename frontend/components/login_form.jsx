@@ -58,6 +58,11 @@ const LoginForm = React.createClass({
 		}
 	},
 
+	handleDemo(e) {
+		e.preventDefault();
+		SessionActions.demoIn();
+	},
+
   fieldErrors(field) {
     const errors = ErrorStore.formErrors(this.state.formType);
 
@@ -80,12 +85,14 @@ const LoginForm = React.createClass({
 
 	render() {
 
-    let navLink, extraFields;
+    let navLink, demoButton, extraFields;
     if (this.state.formType === "login") {
       navLink = <div id="login_form_clickable" onClick={this.toggleForm}>sign up instead</div>;
+			demoButton = <button type="button" onClick={this.handleDemo}>Try as a Guest</button>;
 			extraFields = <br />;
     } else {
       navLink = <div id="login_form_clickable" onClick={this.toggleForm}>log in instead</div>;
+			demoButton = <br />;
 			extraFields = (
 				<div>
 				<label> First Name:
@@ -137,6 +144,7 @@ const LoginForm = React.createClass({
 
         <br />
 				<input type="submit" value="Submit" />
+				{demoButton}
 			</form>
 		);
 	}

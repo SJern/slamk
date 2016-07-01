@@ -36,6 +36,18 @@ const SessionApiUtil = {
 				error("signup", errors);
 			}
 		});
+	},
+
+	demoIn(success, error) {
+		$.ajax({
+			url: '/api/guest',
+			dataType: 'json',
+			success,
+			error(xhr) {
+				const errors = xhr.responseJSON;
+				error("demoin", errors);
+			}
+		});
 	}
 };
 
