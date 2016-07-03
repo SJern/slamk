@@ -92,7 +92,6 @@ const LoginForm = React.createClass({
 			extraFields = <br />;
     } else {
       navLink = <div id="login_form_clickable" onClick={this.toggleForm}>log in instead</div>;
-			demoButton = <br />;
 			extraFields = (
 				<div>
 				<label> First Name:
@@ -144,7 +143,7 @@ const LoginForm = React.createClass({
 
         <br />
 				<input type="submit" value="Submit" />
-				{demoButton}
+					{demoButton}
 			</form>
 		);
 	}

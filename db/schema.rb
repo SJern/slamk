@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160629013903) do
+ActiveRecord::Schema.define(version: 20160702200146) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20160629013903) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "messages", ["room_id"], name: "index_messages_on_room_id", unique: true, using: :btree
+  add_index "messages", ["room_id"], name: "index_messages_on_room_id", using: :btree
 
   create_table "room_users", force: :cascade do |t|
     t.integer  "room_id",    null: false

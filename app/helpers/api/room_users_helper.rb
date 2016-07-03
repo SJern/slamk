@@ -1,0 +1,2 @@
+module Api::RoomUsersHelper
+end

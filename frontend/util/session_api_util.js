@@ -30,7 +30,16 @@ const SessionApiUtil = {
 			type: 'POST',
 			dataType: 'json',
 			data: { user },
-			success,
+			success(user) {
+				success(user);
+				$.ajax({
+					url: 'api/room_users',
+					method: 'POST',
+					data: {room_user: {room_id: 1}},
+					success(room) {console.log(room)},
+					error() {console.log("Join room error under SessionApiUtil#signUp");}
+				});
+			},
 			error(xhr) {
 				const errors = xhr.responseJSON;
 				error("signup", errors);
@@ -42,7 +51,16 @@ const SessionApiUtil = {
 		$.ajax({
 			url: '/api/guest',
 			dataType: 'json',
-			success,
+			success(user) {
+				success(user);
+				$.ajax({
+					url: 'api/room_users',
+					method: 'POST',
+					data: {room_user: {room_id: 1}},
+					success(room) {console.log(room)},
+					error() {console.log("Join room error under SessionApiUtil#demoIn");}
+				});
+			},
 			error(xhr) {
 				const errors = xhr.responseJSON;
 				error("demoin", errors);

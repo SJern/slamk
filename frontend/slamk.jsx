@@ -18,8 +18,8 @@ const appRouter = (
   </Router>
 );
 
-
-
+window.SessionStore = require('./stores/session_store');
+window.MessageApiUtil = require('./util/message_api_util');
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('content');

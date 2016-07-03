@@ -74,7 +74,7 @@ what you'll need to do.
   0. `GET /api/rooms/:id` is called.
   0. `receiveSingleRoom` is set as the callback.
 
-* `updateRoom` (basically add members to room or change title)
+* `updateRoom` (basically change title)
   0. invoked from `RoomForm` `onSubmit`
   0. `PATCH /api/rooms/:id` is called.
   0. `receiveSingleRoom` is set as the callback.

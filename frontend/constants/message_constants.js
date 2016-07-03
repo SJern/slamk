@@ -1,0 +1,7 @@
+const MessageConstants = {
+  MESSAGES_RECEIVED: "MESSAGES_RECEIVED",
+  MESSAGE_RECEIVED: "MESSAGE_RECEIVED",
+  MESSAGE_REMOVED: "MESSAGE_REMOVED"
+};
+
+module.exports = MessageConstants;
