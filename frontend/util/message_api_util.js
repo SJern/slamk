@@ -19,6 +19,27 @@ const MessageApiUtil = {
         console.log("error in MessageApiUtil#createMessage");
       }
     });
+  },
+  updateMessage(message, success) {
+    $.ajax({
+      url: `api/messages/${message.id}`,
+      method: 'PATCH',
+      data: { message },
+      success,
+      error: function () {
+        console.log("error in MessageApiUtil#updateMessage");
+      }
+    });
+  },
+  deleteMessage(id, success) {
+    $.ajax({
+      url: `api/messages/${id}`,
+      method: 'DELETE',
+      success,
+      error: function () {
+        console.log("error in MessageApiUtil#deleteMessage");
+      }
+    });
   }
 };
 

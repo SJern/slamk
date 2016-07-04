@@ -16,11 +16,18 @@ class Api::MessagesController < ApplicationController
   end
 
   def update
-
+    @message = Message.find(params[:id])
+    if @message.update(message_params)
+      render "api/messages/show"
+    else
+      render json: @message.errors, status: 418
+    end
   end
 
   def destroy
-
+    @message = Message.find(params[:id])
+    @message.destroy
+    render "api/messages/show"
   end
 
   private
@@ -28,5 +35,5 @@ class Api::MessagesController < ApplicationController
   def message_params
     params.require(:message).permit(:body, :room_id)
   end
-
+  
 end

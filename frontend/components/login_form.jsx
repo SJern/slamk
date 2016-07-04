@@ -32,7 +32,7 @@ const LoginForm = React.createClass({
 
   redirectIfLoggedIn() {
     if (SessionStore.isUserLoggedIn()) {
-      this.context.router.push("/api/session");
+      this.context.router.push("/messages");
     }
   },
 

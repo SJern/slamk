@@ -10,10 +10,13 @@ const hashHistory = ReactRouter.hashHistory;
 const App = require('./components/app');
 const Splash = require('./components/splash');
 
+const Room = require('./components/room');
+
 const appRouter = (
   <Router history={ hashHistory }>
     <Route path="/" component={ App }>
       <IndexRoute component={ Splash } />
+      <Route path="/messages" component={ Room } />
     </Route>
   </Router>
 );
