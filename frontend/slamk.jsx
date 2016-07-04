@@ -7,10 +7,15 @@ const Route = ReactRouter.Route;
 const IndexRoute = ReactRouter.IndexRoute;
 const hashHistory = ReactRouter.hashHistory;
 
+const SessionActions = require('./actions/session_actions');
 const App = require('./components/app');
 const Splash = require('./components/splash');
 
+
+
 const Room = require('./components/room');
+
+
 
 const appRouter = (
   <Router history={ hashHistory }>
@@ -21,10 +26,18 @@ const appRouter = (
   </Router>
 );
 
+
+
 window.SessionStore = require('./stores/session_store');
 window.MessageApiUtil = require('./util/message_api_util');
 
+
+
 document.addEventListener('DOMContentLoaded', () => {
+  if (window.currentUser) {
+    SessionActions.receiveCurrentUser(window.currentUser);
+  }
+
   const root = document.getElementById('content');
   ReactDOM.render(appRouter, root);
 });

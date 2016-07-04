@@ -7,7 +7,9 @@ const MessageStore = new Store(AppDispatcher);
 let _messages = {};
 
 MessageStore.all = function() {
-  return Object.assign({}, _messages);
+  const messages = [];
+  Object.keys(_messages).forEach(key => messages.push(_messages[key]));
+  return messages.sort((m1, m2) => new Date(m1.created_at) - new Date(m2.created_at));
 };
 
 function resetRoomMessages(messages) {
@@ -39,4 +41,4 @@ MessageStore.__onDispatch = function(payload) {
   }
 };
 
-module.exports = Messagestore;
+module.exports = MessageStore;

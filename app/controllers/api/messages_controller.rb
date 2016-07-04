@@ -9,6 +9,7 @@ class Api::MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.user_id = current_user.id
     if @message.save
+      Pusher.trigger("room_#{@message.room_id}", 'message_created', {})
       render "api/messages/show"
     else
       render json: @message.errors, status: 418
@@ -35,5 +36,5 @@ class Api::MessagesController < ApplicationController
   def message_params
     params.require(:message).permit(:body, :room_id)
   end
-  
+
 end

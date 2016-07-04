@@ -12,11 +12,11 @@ const LoginForm = React.createClass({
   getInitialState() {
     return {
 			formType: "login",
-      username: undefined,
+      username: "",
       password: "",
-			fname: undefined,
-			lname: undefined,
-			email: undefined
+			fname: "",
+			lname: "",
+			email: ""
     };
   },
 
@@ -42,17 +42,17 @@ const LoginForm = React.createClass({
 		let formData;
 		if (this.state.formType === "login") {
 			formData = {
-				username: this.state.username,
+				username: (this.state.username || undefined),
 				password: this.state.password
 			};
 			SessionActions.logIn(formData);
 		} else {
 			formData = {
-				username: this.state.username,
+				username: (this.state.username || undefined),
 				password: this.state.password,
-				fname: this.state.fname,
-				lname: this.state.lname,
-				email: this.state.email
+				fname: (this.state.fname || undefined),
+				lname: (this.state.lname || undefined),
+				email: (this.state.email || undefined)
 			};
 			SessionActions.signUp(formData);
 		}
