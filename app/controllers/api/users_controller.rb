@@ -11,7 +11,7 @@ class Api::UsersController < ApplicationController
     end
   end
 
-  def createGuest
+  def create_guest
     @user = User.new(guest_params)
     @user.guest = true
     if @user.save

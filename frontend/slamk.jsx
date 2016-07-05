@@ -10,10 +10,7 @@ const hashHistory = ReactRouter.hashHistory;
 const SessionActions = require('./actions/session_actions');
 const App = require('./components/app');
 const Splash = require('./components/splash');
-
-
-
-const Room = require('./components/room');
+const Chat = require('./components/chat');
 
 
 
@@ -21,7 +18,7 @@ const appRouter = (
   <Router history={ hashHistory }>
     <Route path="/" component={ App }>
       <IndexRoute component={ Splash } />
-      <Route path="/messages" component={ Room } />
+      <Route path="/messages/:roomTitle" component={ Chat } />
     </Route>
   </Router>
 );
@@ -30,7 +27,7 @@ const appRouter = (
 
 window.SessionStore = require('./stores/session_store');
 window.MessageApiUtil = require('./util/message_api_util');
-
+window.RoomApiUtil = require('./util/room_api_util');
 
 
 document.addEventListener('DOMContentLoaded', () => {

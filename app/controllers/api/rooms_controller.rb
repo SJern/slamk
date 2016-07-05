@@ -12,8 +12,19 @@ class Api::RoomsController < ApplicationController
     end
   end
 
-  def update
-
+  def show_room
+    @room = Room.find_by(title: params[:room_title])
+    p current_user.rooms
+    if @room && current_user.rooms.include?(@room)
+      render "api/rooms/show"
+    else
+      render(
+        json: {
+          base: ["Invalid room title"]
+        },
+        status: 401
+      )
+    end
   end
 
   def destroy

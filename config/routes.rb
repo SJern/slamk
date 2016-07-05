@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root to: 'static_pages#root'
-  get 'api/guest', :to => 'api/users#createGuest'
+  get 'api/guest', :to => 'api/users#create_guest'
+  get 'api/rooms/title', :to => 'api/rooms#show_room'
+  post 'api/room_users/add', :to => 'api/room_users#add'
 
   namespace :api, defaults: {format: :json} do
     resources :messages, only: [:index, :create, :update, :destroy]

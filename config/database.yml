@@ -29,7 +29,7 @@ development:
 # $.ajax({
 #   url: 'api/rooms',
 #   method: 'POST',
-#   data: {room: {title:'#general', channel: true}},
+#   data: {room: {title:'general', channel: true}},
 #   success(){console.log('hi there')},
 #   error(){console.log('oops')}
 # });
