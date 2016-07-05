@@ -7,9 +7,9 @@ const Room = React.createClass({
   render() {
     return (
       <div>
-        <Toolbar title="#general"/>
-        <MessagesIndex roomId={1} />
-        <Submission roomId={1} />
+        <Toolbar title={`#${this.props.room.title}`} />
+        <MessagesIndex roomId={this.props.room.id} />
+        <Submission roomId={this.props.room.id} />
       </div>
     );
   }

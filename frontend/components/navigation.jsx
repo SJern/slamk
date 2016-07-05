@@ -4,7 +4,7 @@ const Navigation = React.createClass({
   render() {
     return (
       <div>
-        {this.props.check}
+        {this.props.room.title}
       </div>
     );
   }
