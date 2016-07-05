@@ -14,7 +14,7 @@ class Api::RoomUsersController < ApplicationController
     @room_user = RoomUser.new(room_user_params)
     room = Room.find_by(id: room_user_params[:room_id])
     @user = User.find_by(id: room_user_params[:user_id])
-    authorized = room.users.include?(current_user)
+    authorized = this_is_a_new(room) || room.users.include?(current_user)
     if room && @user && authorized && @room_user.save
       render "api/users/show"
     else
@@ -23,10 +23,18 @@ class Api::RoomUsersController < ApplicationController
   end
 
   def destroy
+    room_user = RoomUser.find(params[:id])
+    @room = room_user.room
+    room_user.destroy
+    render "api/rooms/show"
   end
 
   private
   def room_user_params
     params.require(:room_user).permit(:room_id, :user_id)
+  end
+
+  def this_is_a_new(room)
+    room.users.empty?
   end
 end

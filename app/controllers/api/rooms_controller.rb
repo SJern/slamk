@@ -1,6 +1,7 @@
 class Api::RoomsController < ApplicationController
   def index
-
+    @rooms = current_user.rooms
+    render "api/rooms/index"
   end
 
   def create
@@ -28,7 +29,9 @@ class Api::RoomsController < ApplicationController
   end
 
   def destroy
-
+    @room = Room.find(params[:id])
+    @room.destroy
+    render "api/rooms/show"
   end
 
   private

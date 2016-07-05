@@ -90,7 +90,7 @@ what you'll need to do.
   0. `DELETE /api/room_users/:id` is called otherwise. (How to get id in the first place???)
   0. `removeRoom` is set as the callback.
 
-### Notebooks API Response Actions
+### Rooms API Response Actions
 
 * `receiveAllRooms`
   0. invoked from an API callback.
