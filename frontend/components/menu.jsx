@@ -3,7 +3,8 @@ const SessionStore = require('../stores/session_store');
 const SessionActions = require('../actions/session_actions');
 
 const Menu = React.createClass({
-  handleSignOut() {
+  handleSignOut(e) {
+    e.preventDefault();
     SessionActions.logOut();
   },
   render() {
