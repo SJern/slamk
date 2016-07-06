@@ -7,7 +7,7 @@ const Room = React.createClass({
   render() {
     return (
       <div>
-        <Toolbar title={`#${this.props.room.title}`} />
+        <Toolbar room={this.props.room} />
         <MessagesIndex roomId={this.props.room.id} />
         <Submission roomId={this.props.room.id} />
       </div>

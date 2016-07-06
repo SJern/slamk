@@ -25,6 +25,7 @@ const SessionActions = {
 
   logOut() {
     SessionApiUtil.logOut(this.removeCurrentUser);
+    window.currentUser = undefined;
   },
 
   receiveCurrentUser(currentUser) {

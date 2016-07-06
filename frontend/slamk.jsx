@@ -8,26 +8,28 @@ const IndexRoute = ReactRouter.IndexRoute;
 const hashHistory = ReactRouter.hashHistory;
 
 const SessionActions = require('./actions/session_actions');
+const SessionStore = require('./stores/session_store');
 const App = require('./components/app');
 const Splash = require('./components/splash');
 const Chat = require('./components/chat');
 
-
+function _ensureLoggedIn(nextState, replace) {
+    if (!SessionStore.isUserLoggedIn()) replace('/');
+}
 
 const appRouter = (
   <Router history={ hashHistory }>
     <Route path="/" component={ App }>
       <IndexRoute component={ Splash } />
-      <Route path="/messages/:roomTitle" component={ Chat } />
+      <Route path="/messages/:roomTitle" component={ Chat } onEnter={ _ensureLoggedIn } />
     </Route>
   </Router>
 );
 
 
 
-window.SessionStore = require('./stores/session_store');
-window.MessageApiUtil = require('./util/message_api_util');
 window.RoomApiUtil = require('./util/room_api_util');
+
 
 
 document.addEventListener('DOMContentLoaded', () => {

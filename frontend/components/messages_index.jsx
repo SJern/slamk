@@ -8,7 +8,7 @@ const MessagesIndex = React.createClass({
     return { messages: MessageStore.all() };
   },
   componentDidMount() {
-    this.messageListener = MessageStore.addListener(this.handleChange);
+    this.messagesListener = MessageStore.addListener(this.handleChange);
     MessageActions.fetchRoomMessages(this.props.roomId);
     this.pusher = new Pusher('0d04cf841bc3ee166b79', {
       encrypted: true
@@ -23,7 +23,7 @@ const MessagesIndex = React.createClass({
     MessageActions.fetchRoomMessages(nextProps.roomId);
   },
   componentWillUnmount() {
-    this.messageListener.remove();
+    this.messagesListener.remove();
     this.pusher.unsubscribe(`room_${this.props.roomId}`);
   },
   handleChange() {

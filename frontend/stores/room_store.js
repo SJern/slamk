@@ -12,6 +12,10 @@ RoomStore.all = function() {
   return rooms;
 };
 
+RoomStore.find = function(id) {
+  return _rooms[id];
+};
+
 function resetAllRooms(rooms) {
   _rooms = {};
   rooms.forEach(room => _rooms[room.id] = room);

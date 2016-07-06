@@ -8,10 +8,16 @@ const RoomApiUtil = require('../util/room_api_util');
 
 const Chat = React.createClass({
   getInitialState() {
-    return { room: {id: 1, title: 'general'} };
+    return { room: {id: 1} };
   },
   setRoom(room) {
     this.setState({room: room});
+  },
+  componentWillMount() {
+    RoomApiUtil.fetchSingleRoomByTitle(this.props.params.roomTitle,
+      this.setRoom,
+      () => hashHistory.push("/messages/general")
+    );
   },
   componentWillReceiveProps(nextProps) {
     RoomApiUtil.fetchSingleRoomByTitle(nextProps.params.roomTitle,

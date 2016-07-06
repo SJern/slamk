@@ -15,8 +15,7 @@ class Api::RoomsController < ApplicationController
 
   def show_room
     @room = Room.find_by(title: params[:room_title])
-    p current_user.rooms
-    if @room && current_user.rooms.include?(@room)
+    if @room && (general?(@room) || a_member_of(@room))
       render "api/rooms/show"
     else
       render(
@@ -39,4 +38,11 @@ class Api::RoomsController < ApplicationController
     params.require(:room).permit(:title, :channel)
   end
 
+  def general?(room)
+    room.title == "general"
+  end
+
+  def a_member_of(room)
+    current_user.rooms.include?(room)
+  end
 end
