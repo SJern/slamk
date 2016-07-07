@@ -1,3 +1,5 @@
+const RoomActions = require('../actions/room_actions');
+
 const SessionApiUtil = {
 	logIn(user, success, error) {
 		$.ajax({
@@ -36,7 +38,9 @@ const SessionApiUtil = {
 					url: 'api/room_users',
 					method: 'POST',
 					data: {room_user: {room_id: 1}},
-					success(room) {console.log(room)},
+					success(room) {
+						RoomActions.receiveSingleRoom(room);
+					},
 					error() {console.log("Join room error under SessionApiUtil#signUp");}
 				});
 			},
@@ -57,7 +61,9 @@ const SessionApiUtil = {
 					url: 'api/room_users',
 					method: 'POST',
 					data: {room_user: {room_id: 1}},
-					success(room) {console.log(room)},
+					success(room) {
+						RoomActions.receiveSingleRoom(room);
+					},
 					error() {console.log("Join room error under SessionApiUtil#demoIn");}
 				});
 			},

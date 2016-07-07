@@ -6,7 +6,7 @@ const Toolbar = React.createClass({
     const room = this.props.room;
     let title = (room.channel) ? `#${room.title}` : `@${room.title}${(room.size > 2) ? ',...' : ''}`;
     return (
-      <div>
+      <div class="channel_header">
         <div>{title}</div>
         <div>{room.size} members</div>
       </div>

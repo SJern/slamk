@@ -6,7 +6,7 @@ const Submission = require('./submission');
 const Room = React.createClass({
   render() {
     return (
-      <div>
+      <div id="room_container">
         <Toolbar room={this.props.room} />
         <MessagesIndex roomId={this.props.room.id} />
         <Submission roomId={this.props.room.id} />

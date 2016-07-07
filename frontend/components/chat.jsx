@@ -27,7 +27,7 @@ const Chat = React.createClass({
   },
   render() {
     return (
-      <div>
+      <div id="client-ui">
         <Navigation room={this.state.room} />
         <Room room={this.state.room} />
       </div>

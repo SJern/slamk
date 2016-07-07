@@ -5,7 +5,7 @@ const RoomsIndex = require('./rooms_index');
 const Navigation = React.createClass({
   render() {
     return (
-      <div>
+      <div id="col_rooms">
         <Menu />
         <RoomsIndex currentRoom={this.props.room} />
       </div>

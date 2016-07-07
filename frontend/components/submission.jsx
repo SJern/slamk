@@ -23,7 +23,7 @@ const Submission = React.createClass({
 
   render() {
     return (
-      <form onSubmit={this.handleEnter}>
+      <form id="messages-input-container" onSubmit={this.handleEnter}>
       <input placeholder="press enter to send" type="text"
         value={this.state.body} onChange={this.update("body")} />
       </form>

@@ -10,7 +10,7 @@ const Menu = React.createClass({
   render() {
     return (
       <div>
-        <h2>Parks and App::creation</h2>
+        <h4>Parks and App::creation</h4>
         <h3>Hi, {SessionStore.currentUser().username}</h3>
         <button onClick={this.handleSignOut} >Sign out</button>
       </div>

@@ -32,7 +32,7 @@ const MessagesIndex = React.createClass({
 
   render() {
     return (
-      <div>
+      <div id="msgs_scroller_div">
         {this.state.messages.map((message, idx) => {
           const showMessageOnly = (idx && (this.state.messages[idx - 1].user_id === message.user_id));
           return <MessageIndexItem message={message}

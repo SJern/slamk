@@ -9,7 +9,7 @@ const App = React.createClass({
 
   render() {
     return (
-      <div>
+      <div id="app">
         {this.props.children}
       </div>
     );
