@@ -2,9 +2,9 @@ const React = require('react');
 const SessionActions = require('../actions/session_actions');
 const SessionStore = require('../stores/session_store');
 const ErrorStore = require('../stores/error_store');
+import { Form, FormGroup, Col, FormControl, Button, Nav, NavItem } from 'react-bootstrap';
 
 const LoginForm = React.createClass({
-
 	contextTypes: {
 		router: React.PropTypes.object.isRequired
 	},
@@ -58,11 +58,6 @@ const LoginForm = React.createClass({
 		}
 	},
 
-	handleDemo(e) {
-		e.preventDefault();
-		SessionActions.demoIn();
-	},
-
   fieldErrors(field) {
     const errors = ErrorStore.formErrors(this.state.formType);
 
@@ -79,72 +74,77 @@ const LoginForm = React.createClass({
     return (e) => this.setState({[property]: e.target.value});
   },
 
-	toggleForm() {
-		this.setState({formType: (this.state.formType === "login") ? "signup" : "login"});
+	handleSelect(selectedKey) {
+		if (selectedKey === "demo") {
+			SessionActions.demoIn();
+		} else {
+			this.setState({formType: selectedKey});
+		}
 	},
 
 	render() {
-
-    let navLink, demoButton, extraFields;
+    let extraFields, submitText;
     if (this.state.formType === "login") {
-      navLink = <div id="login_form_clickable" onClick={this.toggleForm}>sign up instead</div>;
-			demoButton = <button type="button" onClick={this.handleDemo}>Try as a Guest</button>;
-			extraFields = <br />;
+			submitText = "Sign in";
     } else {
-      navLink = <div id="login_form_clickable" onClick={this.toggleForm}>log in instead</div>;
+			submitText = "Sign Up";
 			extraFields = (
 				<div>
-				<label> First Name:
-					{ this.fieldErrors("fname") }
-					<input type="text"
-					value={this.state.fname}
-					onChange={this.update("fname")} />
- 				</label>
-				<br />
-				<label> Last Name:
-					{ this.fieldErrors("lname") }
-					<input type="text"
-					value={this.state.lname}
-					onChange={this.update("lname")} />
-				</label>
-				<br />
-				<label> Email:
-					{ this.fieldErrors("email") }
-					<input type="text"
-					value={this.state.email}
-					onChange={this.update("email")} />
-				</label>
+					<FormGroup controlId="formHorizontalFirstName">
+						<Col sm={10}>
+						<FormControl type="text" placeholder="First Name" value={this.state.fname} onChange={this.update("fname")} />{ this.fieldErrors("fname") }
+						</Col>
+					</FormGroup>
+
+					<FormGroup controlId="formHorizontalLastName">
+						<Col sm={10}>
+						<FormControl type="text" placeholder="Last Name" value={this.state.lname} onChange={this.update("lname")} />{ this.fieldErrors("lname") }
+						</Col>
+					</FormGroup>
+
+					<FormGroup controlId="formHorizontalEmail">
+						<Col sm={10}>
+							<FormControl type="email" placeholder="leslie.knope@example.com" value={this.state.email} onChange={this.update("email")} />{ this.fieldErrors("email") }
+						</Col>
+					</FormGroup>
 				</div>
 			);
     }
 
 		return (
-			<form onSubmit={this.handleSubmit}>
-        Welcome to Slamk! Please { this.state.formType } or { navLink }
+			<div className="log-in-form">
+				<Nav bsStyle="tabs" justified activeKey={this.state.formType} onSelect={this.handleSelect}>
+					<NavItem eventKey={"login"} >Sign In</NavItem>
+					<NavItem eventKey={"demo"} >Try as a Guest</NavItem>
+					<NavItem eventKey={"signup"} >Sign Up</NavItem>
+				</Nav>
 
-        { this.fieldErrors("base") }
+				<Form id="log-in-inputs" horizontal onSubmit={this.handleSubmit}>
+					{ this.fieldErrors("base") }
 
-        <br />
-				<label> Username:
-          { this.fieldErrors("username") }
-					<input type="text"
-            value={this.state.username}
-            onChange={this.update("username")} />
-				</label>
+					<FormGroup controlId="formHorizontalUsername">
+					  <Col sm={10}>
+					    <FormControl type="text" placeholder="Username" value={this.state.username} onChange={this.update("username")} />{ this.fieldErrors("username") }
+					  </Col>
+					</FormGroup>
 
-				{extraFields}
+					{extraFields}
 
-				<label> Password:
-          { this.fieldErrors("password") }
-          <input type="password"
-            value={this.state.password}
-            onChange={this.update("password")} />
-				</label>
+					<FormGroup controlId="formHorizontalPassword">
+					  <Col sm={10}>
+					    <FormControl type="password" placeholder="Password" value={this.state.password} onChange={this.update("password")} />{ this.fieldErrors("password") }
+					  </Col>
+					</FormGroup>
 
-        <br />
-				<input type="submit" value="Submit" />
-					{demoButton}
-			</form>
+					<FormGroup>
+					  <Col sm={10}>
+					    <Button bsStyle="success" type="submit">
+					      {`${submitText}`}
+					    </Button>
+					  </Col>
+					</FormGroup>
+				</Form>
+			</div>
 		);
 	}
 });
