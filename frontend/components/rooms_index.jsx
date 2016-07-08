@@ -37,6 +37,7 @@ const RoomsIndex = React.createClass({
         })}
 
         <div>DIRECT MESSAGES</div>
+        <NewRoomModal isChannel={false} />
         {dMs.map(dM => {
           return <RoomIndexItem key={dM.id} room={dM} />;
         })}

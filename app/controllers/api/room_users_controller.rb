@@ -12,11 +12,11 @@ class Api::RoomUsersController < ApplicationController
 
   def add
     @room_user = RoomUser.new(room_user_params)
-    room = Room.find_by(id: room_user_params[:room_id])
+    @room = Room.find_by(id: room_user_params[:room_id])
     @user = User.find_by(id: room_user_params[:user_id])
-    authorized = this_is_a_new(room) || room.users.include?(current_user)
-    if room && @user && authorized && @room_user.save
-      render "api/users/show"
+    authorized = this_is_a_new(@room) || @room.users.include?(current_user)
+    if @room && @user && authorized && @room_user.save
+      render "api/rooms/show"
     else
       render json: @room_user.errors, status: 418
     end

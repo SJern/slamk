@@ -1,3 +1,6 @@
+const ReactRouter = require('react-router');
+const hashHistory = ReactRouter.hashHistory;
+
 const AppDispatcher = require('../dispatcher/dispatcher.js');
 const Store = require('flux/utils').Store;
 const RoomConstants = require('../constants/room_constants');
@@ -29,6 +32,7 @@ function resetSingleRoom(room) {
 
 function removeSingleRoom(room) {
   delete _rooms[room.id];
+  hashHistory.push("/messages/general");
   RoomStore.__emitChange();
 }
 

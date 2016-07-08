@@ -1,6 +1,5 @@
 const AppDispatcher = require('../dispatcher/dispatcher');
 const RoomConstants = require('../constants/room_constants');
-const RoomApiUtil = require('../util/room_api_util');
 const ErrorActions = require('./error_actions');
 
 const RoomActions = {
@@ -11,7 +10,7 @@ const RoomActions = {
     RoomApiUtil.createRoom(roomData, userIds, this.receiveSingleRoom, ErrorActions.setErrors);
   },
   addRoomMember(room_id, user_id) {
-    RoomApiUtil.addRoomMember(room_id, user_id);
+    RoomApiUtil.addRoomMember(room_id, user_id, this.receiveSingleRoom);
   },
   joinRoom(room_id) {
     RoomApiUtil.joinRoom(room_id, this.receiveSingleRoom);
@@ -44,5 +43,3 @@ const RoomActions = {
 };
 
 module.exports = RoomActions;
-
-// TODO  userIds for createRoom must begin with current_user.id

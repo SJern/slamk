@@ -25,6 +25,9 @@ const Chat = React.createClass({
       () => hashHistory.push("/messages/general")
     );
   },
+  shouldComponentUpdate: function(nextProps, nextState) {
+    return nextState.room.id !== this.state.room.id;
+  },
   render() {
     return (
       <div id="client-ui">

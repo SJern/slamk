@@ -1,4 +1,5 @@
 const SessionStore = require('../stores/session_store');
+const RoomActions = require('../actions/room_actions');
 
 const RoomApiUtil = {
   fetchJoinedRooms(success) {
@@ -17,10 +18,10 @@ const RoomApiUtil = {
       method: 'POST',
       data: { room },
       success(room) {
-        self.addRoomMember(room.id, SessionStore.currentUser().id);
+        RoomActions.addRoomMember(room.id, SessionStore.currentUser().id);
         success(room);
         if (userIds.length) {
-          userIds.forEach(id => self.addRoomMember(room.id, id));
+          userIds.forEach(id => RoomActions.addRoomMember(room.id, id));
         }
       },
       error(xhr) {
@@ -30,12 +31,14 @@ const RoomApiUtil = {
       }
     });
   },
-  addRoomMember(room_id, user_id) {
+  addRoomMember(room_id, user_id, success) {
     $.ajax({
       url: 'api/room_users/add',
       method: 'POST',
       data: {room_user: {room_id: room_id, user_id: user_id}},
-      success(user) {console.log(user)},
+      success(room) {
+        success(room);
+      },
       error() {console.log("error under RoomApiUtil#addRoomMember");}
     });
   },
