@@ -6,6 +6,8 @@ const RoomStore = require('../stores/room_store');
 const RoomActions = require('../actions/room_actions');
 const RoomIndexItem = require('./room_index_item');
 
+const NewRoomModal = require('./new_room_modal');
+
 const RoomsIndex = React.createClass({
   getInitialState() {
     return { rooms: RoomStore.all() };
@@ -29,9 +31,11 @@ const RoomsIndex = React.createClass({
     return (
       <div>
         <div>CHANNELS</div>
+        <NewRoomModal isChannel={true} />
         {channels.map(channel => {
           return <RoomIndexItem key={channel.id} room={channel} />;
         })}
+
         <div>DIRECT MESSAGES</div>
         {dMs.map(dM => {
           return <RoomIndexItem key={dM.id} room={dM} />;
