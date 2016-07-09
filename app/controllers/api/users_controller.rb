@@ -1,5 +1,11 @@
 
 class Api::UsersController < ApplicationController
+  def index
+    @users = User.all
+    @users = @users.reject { |user| user == current_user }
+    render "api/users/index"
+  end
+
   def create
     @user = User.new(user_params)
     @user.guest = false

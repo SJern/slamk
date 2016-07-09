@@ -9,6 +9,10 @@ const ErrorActions = require('../actions/error_actions');
 const SessionStore = require('../stores/session_store');
 import { Form, FormGroup, ControlLabel, Col, FormControl, Button, Nav, NavItem } from 'react-bootstrap';
 
+const MultiSelectField = require('./multi_select_field');
+const SelectionStore = require('../stores/selection_store');
+const SelectionActions = require('../actions/selection_actions');
+
 const LoginForm = React.createClass({
   getInitialState() {
     return {title: "", userIds: []};
@@ -18,6 +22,7 @@ const LoginForm = React.createClass({
     this.errorListener = ErrorStore.addListener(this.forceUpdate.bind(this));
     this.modalListener = RoomStore.addListener(this.props.closeModal);
     this.redirectListener = RoomStore.addListener(this.redirectIfLoggedIn);
+    this.selectionsListener = SelectionStore.addListener(this.setUserIds);
   },
 
   componentWillUnmount() {
@@ -25,6 +30,12 @@ const LoginForm = React.createClass({
 		ErrorActions.clearErrors();
     this.modalListener.remove();
     this.redirectListener.remove();
+    this.selectionsListener.remove();
+    SelectionActions.clearSelections();
+  },
+
+  setUserIds() {
+    this.setState({ userIds: SelectionStore.all() });
   },
 
 	redirectIfLoggedIn() {
@@ -75,10 +86,7 @@ const LoginForm = React.createClass({
 			extraFields = (
 				<FormGroup controlId="formControlsSelectMultiple">
 					<ControlLabel>Multiple select</ControlLabel>
-					<FormControl componentClass="select" multiple>
-						<option value="select">select (multiple)</option>
-						<option value="other">...</option>
-					</FormControl>
+					<MultiSelectField />
 				</FormGroup>
 			);
     }

@@ -4,13 +4,17 @@ const MessageIndexItem = React.createClass({
 
   render() {
     let info;
+    const message = this.props.message;
     if (!this.props.showMessageOnly) {
-      info = <div><b>{this.props.message.username}</b></div>;
+      info = (<div>
+        <div><b>{message.username}</b></div>
+        <div>{(new Date(message.created_at)).toString().slice(4, 21)}</div>
+      </div>);
     }
     return (
         <div>
           {info}
-          <div>{this.props.message.body}</div>
+          <div>{message.body}</div>
         </div>
     );
   }

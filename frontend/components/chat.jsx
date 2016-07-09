@@ -26,7 +26,7 @@ const Chat = React.createClass({
     );
   },
   shouldComponentUpdate: function(nextProps, nextState) {
-    return ((this.state.room.id === 1) || (nextState.room.id !== this.state.room.id));
+    return ((this.state.room.id === 1) || (nextState.room.id !== this.state.room.id) || (nextState.room.size > this.state.room.size));
   },
   render() {
     return (
