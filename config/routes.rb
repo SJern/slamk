@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   get 'api/users', :to => 'api/users#index'
   get 'api/rooms/title', :to => 'api/rooms#show_room'
   post 'api/room_users/add', :to => 'api/room_users#add'
-
+  get 'api/channels/joinable', :to => 'api/rooms#joinable'
+  
   namespace :api, defaults: {format: :json} do
     resources :messages, only: [:index, :create, :update, :destroy]
     resources :room_users, only: [:create, :destroy]

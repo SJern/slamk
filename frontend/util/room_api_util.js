@@ -11,6 +11,12 @@ const RoomApiUtil = {
 			}
     });
   },
+  fetchJoinableChannels(success) {
+    $.ajax({
+      url: "api/channels/joinable",
+      success
+    });
+  },
   createRoom(room, userIds, success, error) {
     const self = this;
     $.ajax({

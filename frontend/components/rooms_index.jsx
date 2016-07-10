@@ -7,6 +7,7 @@ const RoomActions = require('../actions/room_actions');
 const RoomIndexItem = require('./room_index_item');
 
 const NewRoomModal = require('./new_room_modal');
+const JoinChannelModal = require('./join_channel_modal');
 
 const RoomsIndex = React.createClass({
   getInitialState() {
@@ -30,7 +31,7 @@ const RoomsIndex = React.createClass({
     const self = this;
     return (
       <div>
-        <div>CHANNELS</div>
+        <JoinChannelModal />
         <NewRoomModal isChannel={true} />
         {channels.map(channel => {
           return <RoomIndexItem key={channel.id} room={channel} />;

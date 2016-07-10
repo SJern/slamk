@@ -4,6 +4,8 @@ const hashHistory = ReactRouter.hashHistory;
 
 const RoomActions = require('../actions/room_actions');
 
+const TiDelete = require('react-icons/lib/ti/delete');
+
 const RoomIndexItem = React.createClass({
   handleSelection(room) {
     hashHistory.push(`/messages/${room.title}`);
@@ -21,7 +23,7 @@ const RoomIndexItem = React.createClass({
     const room = this.props.room;
     let leaveButton;
     if (room.title !== "general") {
-      leaveButton = <button onClick={this.leaveRoom.bind(null, room)}>Leave room</button>;
+      leaveButton = <TiDelete color="white" onClick={this.leaveRoom.bind(null, room)} />;
     }
     return (
         <div>
