@@ -1,6 +1,6 @@
 const React = require('react');
 
-import { Modal, Popover, Button } from 'react-bootstrap';
+import { Modal, Popover, Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 const MdAddBox = require('react-icons/lib/md/add-box');
 
 const NewRoomForm = require('./new_room_form');
@@ -21,9 +21,14 @@ const NewRoomModal = React.createClass({
   },
 
   render() {
+    const tooltip = (
+      <Tooltip id="tooltip">Start a {this.props.isChannel ? "new channel" : "private chat between some friends" } !</Tooltip>
+    );
     return (
       <div>
-        <MdAddBox color="white" onClick={this.open} />
+        <OverlayTrigger placement="top" overlay={tooltip}>
+          <MdAddBox color="white" onClick={this.open} />
+        </OverlayTrigger>
 
         <Modal show={this.state.showModal} onHide={this.close}>
           <Modal.Header closeButton>

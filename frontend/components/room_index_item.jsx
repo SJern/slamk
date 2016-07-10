@@ -5,6 +5,7 @@ const hashHistory = ReactRouter.hashHistory;
 const RoomActions = require('../actions/room_actions');
 
 const TiDelete = require('react-icons/lib/ti/delete');
+import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 
 const RoomIndexItem = React.createClass({
   handleSelection(room) {
@@ -21,9 +22,16 @@ const RoomIndexItem = React.createClass({
 
   render() {
     const room = this.props.room;
+    const tooltip = (
+      <Tooltip id="tooltip">Leave this {room.channel ? 'channel' : 'direct-message room'}</Tooltip>
+    );
     let leaveButton;
     if (room.title !== "general") {
-      leaveButton = <TiDelete color="white" onClick={this.leaveRoom.bind(null, room)} />;
+      leaveButton = (
+        <OverlayTrigger placement="right" overlay={tooltip}>
+          <TiDelete color="white" onClick={this.leaveRoom.bind(null, room)} />
+        </OverlayTrigger>
+      );
     }
     return (
         <div>

@@ -1,6 +1,6 @@
 const React = require('react');
 
-import { Modal, Popover, Button } from 'react-bootstrap';
+import { Modal, Popover, Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 
 const JoinChannelForm = require('./join_channel_form');
 
@@ -20,9 +20,14 @@ const JoinChannelModal = React.createClass({
   },
 
   render() {
+    const tooltip = (
+      <Tooltip id="tooltip">Join different channels to chat !</Tooltip>
+    );
     return (
       <div>
-        <div onClick={this.open} >CHANNELS</div>
+        <OverlayTrigger placement="top" overlay={tooltip}>
+          <div onClick={this.open} >CHANNELS</div>
+        </OverlayTrigger>
 
         <Modal show={this.state.showModal} onHide={this.close}>
           <Modal.Header closeButton>
