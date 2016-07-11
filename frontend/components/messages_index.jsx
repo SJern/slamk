@@ -3,7 +3,7 @@ const MessageStore = require('../stores/message_store');
 const MessageActions = require('../actions/message_actions');
 const MessageIndexItem = require('./message_index_item');
 
-const GistEmbed = require('./gist_embed');
+const GistEmbed = require('../util/gist_embed');
 
 const MessagesIndex = React.createClass({
   getInitialState() {

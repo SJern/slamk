@@ -34,5 +34,8 @@ html, body, #content, #app {
 }
 
 .btn {
-  padding: 12px 12px;
+  padding: 13px 12px;
+}
+.input-group-btn:first-child>.btn, .input-group-btn:first-child>.btn-group {
+    margin-right: 10px;
 }
