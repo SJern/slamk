@@ -1,6 +1,8 @@
 const React = require('react');
 const MessageActions = require('../actions/message_actions');
 
+import { InputGroup, DropdownButton, MenuItem, FormControl } from 'react-bootstrap';
+
 const Submission = React.createClass({
   getInitialState() {
     return {body: ""};
@@ -24,8 +26,16 @@ const Submission = React.createClass({
   render() {
     return (
       <form id="messages-input-container" onSubmit={this.handleEnter}>
-      <input placeholder="press enter to send" type="text"
-        value={this.state.body} onChange={this.update("body")} />
+        <InputGroup>
+          <DropdownButton dropup
+            componentClass={InputGroup.Button}
+            id="input-dropdown-addon"
+            title="Action"
+          >
+            <MenuItem key="1">Item</MenuItem>
+          </DropdownButton>
+          <FormControl type="text" placeholder="Press enter to send" value={this.state.body} onChange={this.update("body")}/>
+        </InputGroup>
       </form>
     );
   }

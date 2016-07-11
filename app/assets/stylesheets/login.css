@@ -24,7 +24,7 @@
 .log-in-form {
   margin: auto;
   padding: 15px;
-  font-family: 'Lato';
+  font-family: 'Lato', sans-serif;
   font-size: 21px;
 }
 .form-control {
@@ -56,7 +56,7 @@
   color: white;
   font-size: 5vh;
   font-weight: bold;
-  font-family: 'Lato';
+  font-family: 'Lato', sans-serif;
   text-align: center;
 }
 #splash-title p {

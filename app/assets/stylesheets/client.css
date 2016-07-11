@@ -3,7 +3,7 @@ html, body, #content, #app {
 }
 
 #client-ui {
-  font-family: 'Lato';
+  font-family: 'Lato', sans-serif;
   display: flex;
   height: 100%;
 }
@@ -31,4 +31,8 @@ html, body, #content, #app {
 
 #messages-input-container {
   flex: 1 10%;
+}
+
+.btn {
+  padding: 12px 12px;
 }
