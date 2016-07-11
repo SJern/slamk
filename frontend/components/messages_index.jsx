@@ -3,6 +3,8 @@ const MessageStore = require('../stores/message_store');
 const MessageActions = require('../actions/message_actions');
 const MessageIndexItem = require('./message_index_item');
 
+const GistEmbed = require('./gist_embed');
+
 const MessagesIndex = React.createClass({
   getInitialState() {
     return { messages: MessageStore.all() };
@@ -38,6 +40,8 @@ const MessagesIndex = React.createClass({
           return <MessageIndexItem message={message}
             showMessageOnly={showMessageOnly} key={message.id} />;
         })}
+        <GistEmbed gistId='81ed070e60312be93fa05c57d30d06b2'/>
+        <GistEmbed gistId='e080418ec48a6cb00b5b9ee8ac70d470'/>
       </div>
     );
   }
