@@ -32,7 +32,7 @@ const Submission = React.createClass({
             componentClass={InputGroup.Button}
             id="input-dropdown-addon"
             title={<MdApps />}>
-            <MenuItem>Create a snippet of code</MenuItem>
+            <MenuItem>Send a snippet of code</MenuItem>
           </DropdownButton>
           <FormControl type="text" placeholder="Press enter to send" value={this.state.body} onChange={this.update("body")}/>
         </InputGroup>
