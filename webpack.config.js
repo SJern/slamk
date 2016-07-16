@@ -1,4 +1,5 @@
-var path = require("path");
+const path = require("path");
+const webpack = require("webpack");
 
 module.exports = {
   context: __dirname,
@@ -11,6 +12,11 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: true
       }
     })
   ],
