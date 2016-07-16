@@ -5,7 +5,6 @@ const MdAddBox = require('react-icons/lib/md/add-box');
 
 const NewRoomForm = require('./new_room_form');
 
-
 const NewRoomModal = React.createClass({
 
   getInitialState() {
@@ -45,7 +44,5 @@ const NewRoomModal = React.createClass({
     );
   }
 });
-
-
 
 module.exports = NewRoomModal;

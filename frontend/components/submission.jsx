@@ -1,7 +1,8 @@
 const React = require('react');
 const MessageActions = require('../actions/message_actions');
+const NewSnippetModal = require('./new_snippet_modal');
 
-import { InputGroup, DropdownButton, MenuItem, FormControl } from 'react-bootstrap';
+import { InputGroup, DropdownButton, FormControl, MenuItem } from 'react-bootstrap';
 const MdApps = require('react-icons/lib/md/apps');
 
 const Submission = React.createClass({
@@ -32,7 +33,7 @@ const Submission = React.createClass({
             componentClass={InputGroup.Button}
             id="input-dropdown-addon"
             title={<MdApps />}>
-            <MenuItem>Send a snippet of code</MenuItem>
+            <MenuItem><NewSnippetModal /></MenuItem>
           </DropdownButton>
           <FormControl type="text" placeholder="Press enter to send" value={this.state.body} onChange={this.update("body")}/>
         </InputGroup>

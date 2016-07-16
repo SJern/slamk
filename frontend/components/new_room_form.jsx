@@ -7,7 +7,7 @@ const RoomActions = require('../actions/room_actions');
 const ErrorStore = require('../stores/error_store');
 const ErrorActions = require('../actions/error_actions');
 const SessionStore = require('../stores/session_store');
-import { Form, FormGroup, ControlLabel, Col, FormControl, Button, Nav, NavItem } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 
 const MultiSelectField = require('./multi_select_field');
 const SelectionStore = require('../stores/selection_store');
