@@ -1,5 +1,5 @@
 #splash-bg {
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(45%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 1))), url('http://cdn2us.denofgeek.com/sites/denofgeekus/files/parks-and-recreation-parks-and-recreation-19285064-1600-1200.jpg');
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(45%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 1))), url('https://res.cloudinary.com/slamk/image/upload/v1468697465/parks-and-recreation-parks-and-recreation-19285064-1600-1200_xbmpgq.jpg');
   height: 100vh;
   background-size: cover;
   display: flex;
