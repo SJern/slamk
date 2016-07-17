@@ -39,3 +39,10 @@ html, body, #content, #app {
 .input-group-btn:first-child>.btn, .input-group-btn:first-child>.btn-group {
     margin-right: 10px;
 }
+.dropdown-menu a {
+  padding: 20px;
+  color: black;
+}
+.dropdown-menu a:hover {
+  text-decoration: none;
+}

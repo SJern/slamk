@@ -11,19 +11,25 @@ const NewSnippetModal = React.createClass({
   },
 
   close() {
+    console.log("hahahahhaksdfhwowh");
+    console.log("beforeclose", this.state.showModal);
     this.setState({ showModal: false });
+    console.log("afterclose", this.state.showModal);
   },
 
   open() {
+    console.log("oppppeeeeen");
+    console.log("before", this.state.showModal);
     this.setState({ showModal: true });
+    console.log("after", this.state.showModal);
   },
 
   render() {
     return (
       <div>
-        <div onClick={this.open}>Send a snippet of code</div>
+        <MenuItem onClick={this.open}>Create a snippet of code</MenuItem>
 
-        <Modal show={this.state.showModal} onHide={this.close}>
+        <Modal backdrop={'static'} show={this.state.showModal} onHide={this.close}>
           <Modal.Header closeButton>
             <Modal.Title>Modal heading</Modal.Title>
           </Modal.Header>
