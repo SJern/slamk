@@ -12,9 +12,14 @@ const NewSnippetForm = React.createClass({
 	getInitialState() {
 		return {fileName: "", body: ""};
 	},
-
+	componentDidMount() {
+		this.modalListener = MessageStore.addListener(this.props.closeModal);
+	},
+	componentWillUnmount() {
+		this.modalListener.remove();
+	},
 	onCodeChange(newCode) {
-		this.setState({body: newCode})
+		this.setState({body: newCode});
 	},
 	update(property) {
 		return (e) => this.setState({[property]: e.target.value});
