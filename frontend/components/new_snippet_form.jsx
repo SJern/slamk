@@ -20,6 +20,8 @@ const NewSnippetForm = React.createClass({
 		this.modalListener.remove();
 	},
 	closeModalOnSuccess() {
+		console.log("session", SessionStore.currentUser());
+		console.log("messagestore", MessageStore.lastMessageUserId());
 		if (SessionStore.currentUser().id === MessageStore.lastMessageUserId()) {
 			this.props.closeModal();
 		}
