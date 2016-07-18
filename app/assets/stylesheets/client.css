@@ -26,11 +26,11 @@ html, body, #content, #app {
 
 #msgs_scroller_div {
   overflow: scroll;
-  flex: 1 80%;
+  flex: 1 86%;
 }
 
 #messages-input-container {
-  flex: 1 10%;
+  flex: 1 4%;
 }
 
 .input-group-addon div {
