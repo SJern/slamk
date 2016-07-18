@@ -3,6 +3,7 @@ import brace from 'brace';
 import AceEditor from 'react-ace';
 
 const MessageStore = require('../stores/message_store');
+const SessionStore = require('../stores/session_store');
 
 import 'brace/mode/javascript';
 import 'brace/theme/github';
@@ -13,11 +14,17 @@ const NewSnippetForm = React.createClass({
 		return {fileName: "", body: ""};
 	},
 	componentDidMount() {
-		this.modalListener = MessageStore.addListener(this.props.closeModal);
+		this.modalListener = MessageStore.addListener(this.closeModalOnSuccess);
 	},
 	componentWillUnmount() {
 		this.modalListener.remove();
 	},
+	closeModalOnSuccess() {
+		if (SessionStore.currentUser().id === MessageStore.lastMessageUserId()) {
+			this.props.closeModal();
+		}
+	},
+
 	onCodeChange(newCode) {
 		this.setState({body: newCode});
 	},
