@@ -5,11 +5,16 @@ const MessageConstants = require('../constants/message_constants');
 const MessageStore = new Store(AppDispatcher);
 
 let _messages = {};
+let _lastMessage = {};
 
 MessageStore.all = function() {
   const messages = [];
   Object.keys(_messages).forEach(key => messages.push(_messages[key]));
   return messages.sort((m1, m2) => new Date(m1.created_at) - new Date(m2.created_at));
+};
+
+MessageStore.lastMessageUserId = function() {
+  return _lastMessage.user_id;
 };
 
 function resetRoomMessages(messages) {
@@ -19,6 +24,7 @@ function resetRoomMessages(messages) {
 }
 
 function resetSingleMessage(message) {
+  _lastMessage = message;
   _messages[message.id] = message;
   MessageStore.__emitChange();
 }

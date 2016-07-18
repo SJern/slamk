@@ -2,8 +2,8 @@ const React = require('react');
 const MessageActions = require('../actions/message_actions');
 const NewSnippetModal = require('./new_snippet_modal');
 
-import { InputGroup, DropdownButton, FormControl } from 'react-bootstrap';
-const MdApps = require('react-icons/lib/md/apps');
+import { InputGroup, FormControl } from 'react-bootstrap';
+
 
 const Submission = React.createClass({
   getInitialState() {
@@ -29,12 +29,7 @@ const Submission = React.createClass({
     return (
       <form id="messages-input-container" onSubmit={this.handleEnter}>
         <InputGroup>
-          <DropdownButton dropup noCaret
-            componentClass={InputGroup.Button}
-            id="input-dropdown-addon"
-            title={<MdApps />}>
-            <NewSnippetModal />
-          </DropdownButton>
+          <InputGroup.Addon><NewSnippetModal /></InputGroup.Addon>
           <FormControl type="text" placeholder="Press enter to send" value={this.state.body} onChange={this.update("body")}/>
         </InputGroup>
       </form>

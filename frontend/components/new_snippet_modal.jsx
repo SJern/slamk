@@ -1,8 +1,9 @@
 const React = require('react');
 
-import { Modal, Button, MenuItem } from 'react-bootstrap';
+import { Modal, Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 
 const NewSnippetForm = require('./new_snippet_form');
+const MdApps = require('react-icons/lib/md/apps');
 
 const NewSnippetModal = React.createClass({
 
@@ -11,25 +12,24 @@ const NewSnippetModal = React.createClass({
   },
 
   close() {
-    console.log("hahahahhaksdfhwowh");
-    console.log("beforeclose", this.state.showModal);
     this.setState({ showModal: false });
-    console.log("afterclose", this.state.showModal);
   },
 
   open() {
-    console.log("oppppeeeeen");
-    console.log("before", this.state.showModal);
     this.setState({ showModal: true });
-    console.log("after", this.state.showModal);
   },
 
   render() {
+    const tooltip = (
+      <Tooltip id="tooltip">Open the source code editor here</Tooltip>
+    );
     return (
       <div>
-        <MenuItem onClick={this.open}>Create a snippet of code</MenuItem>
+        <OverlayTrigger placement="top" overlay={tooltip}>
+          <MdApps onClick={this.open}/>
+        </OverlayTrigger>
 
-        <Modal backdrop={'static'} show={this.state.showModal} onHide={this.close}>
+        <Modal show={this.state.showModal} onHide={this.close}>
           <Modal.Header closeButton>
             <Modal.Title>Modal heading</Modal.Title>
           </Modal.Header>

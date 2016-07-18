@@ -33,16 +33,6 @@ html, body, #content, #app {
   flex: 1 10%;
 }
 
-.btn {
-  padding: 13px 12px;
-}
-.input-group-btn:first-child>.btn, .input-group-btn:first-child>.btn-group {
-    margin-right: 10px;
-}
-.dropdown-menu a {
-  padding: 20px;
-  color: black;
-}
-.dropdown-menu a:hover {
-  text-decoration: none;
+.input-group-addon div {
+    padding-right: 12px;
 }
