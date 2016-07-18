@@ -29,7 +29,7 @@ const Submission = React.createClass({
     return (
       <form id="messages-input-container" onSubmit={this.handleEnter}>
         <InputGroup>
-          <InputGroup.Addon><NewSnippetModal /></InputGroup.Addon>
+          <InputGroup.Addon><NewSnippetModal roomId={this.props.roomId}/></InputGroup.Addon>
           <FormControl type="text" placeholder="Press enter to send" value={this.state.body} onChange={this.update("body")}/>
         </InputGroup>
       </form>

@@ -9,7 +9,7 @@ class Api::MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.user_id = current_user.id
     if @message.save
-      Pusher.trigger("room_#{@message.room_id}", 'message_created', {})
+      Pusher.trigger("room_#{@message.room_id}", 'message_created', @message)
       render "api/messages/show"
     else
       render json: @message.errors, status: 418

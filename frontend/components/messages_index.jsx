@@ -18,7 +18,7 @@ const MessagesIndex = React.createClass({
     var channel = this.pusher.subscribe(`room_${this.props.roomId}`);
     const self = this;
     channel.bind('message_created', function(data) {
-      MessageActions.fetchRoomMessages(self.props.roomId);
+      MessageActions.receiveSingleMessage(data);
     });
   },
   componentWillReceiveProps(nextProps) {
