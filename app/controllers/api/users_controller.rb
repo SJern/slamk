@@ -1,7 +1,7 @@
 
 class Api::UsersController < ApplicationController
   def index
-    @users = User.all
+    @users = User.all.includes(:favorites)
     @users = @users.reject { |user| user == current_user }
     render "api/users/index"
   end
