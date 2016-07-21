@@ -20,7 +20,8 @@ class Api::FavoritesController < ApplicationController
   end
 
   def destroy
-    @fav_message = Favorite.find_by(fav_message_id: params[:id], user_id: current_user.id)
+    @fav_message = Favorite.find(params[:id])
+    # @fav_message = Favorite.find_by(fav_message_id: params[:id], user_id: current_user.id)
     if @fav_message.destroy
       @fav_messages = Favorite.all
       render "api/favorites/index"

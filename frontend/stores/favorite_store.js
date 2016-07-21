@@ -30,12 +30,14 @@ FavoriteStore.findByUser = function(userId) {
 //   });
 // };
 
-FavoriteStore.findFavorited = function(favMessageId, userId){
+FavoriteStore.findFavorited = function(userId, favMessageId){
+  let favorited;
   Object.keys(_favorites).forEach ( (key) => {
     if (_favorites[key].fav_message_id === favMessageId && _favorites[key].user_id === userId) {
-      return _favorites[key];
+      favorited = _favorites[key];
     }
   });
+  return favorited;
 };
 
 const resetFavorites = function(favorites) {

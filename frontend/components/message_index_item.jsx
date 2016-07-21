@@ -22,6 +22,7 @@ const MessageIndexItem = React.createClass({
     this.favoriteStoreListener.remove();
   },
   _favoriteChange(){
+    console.log(`All Favorites Length: ${FavoriteStore.all().length}`);
     this.setState({
       favorites: FavoriteStore.all(),
       favorited: FavoriteStore.findFavorited(
@@ -36,18 +37,11 @@ const MessageIndexItem = React.createClass({
       user_id: currentUser.id,
       fav_message_id: this.props.message.id});
   },
-  // _removeFavorite(){
-  //   let currentUser = SessionStore.currentUser();
-  //   let message = this.props.message;
-  //   console.log(this.state.favorites);
-  //   console.log(this.state.favorited);
-  //
-  //   console.log(this.props.message.id);
-  //   console.log(currentUser.id);
-  //   let favorited = FavoriteStore.findFavorited(currentUser.id, message.id);
-  //   console.log(favorited);
-  //   // FavoriteActions.deleteFavorite(this.state.favoritedId);
-  // },
+  _removeFavorite(){
+    let currentUser = SessionStore.currentUser();
+    let message = this.props.message;
+    FavoriteActions.deleteFavorite(this.state.favorited.id);
+  },
 
   render() {
     let info, body;
