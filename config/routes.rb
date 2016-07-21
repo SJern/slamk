@@ -12,6 +12,6 @@ Rails.application.routes.draw do
     resources :rooms, only: [:index, :create, :update, :destroy]
     resource :user, only: [:create]
     resource :session, only: [:create, :destroy, :show]
-    resource :favorites, only: [:index, :create, :destroy]
+    resources :favorites, only: [:index, :create, :destroy]
   end
 end

@@ -1,1 +1,1 @@
-json.partial! '/api/favorites/fav_message', fav_message: @fav_message
+json.extract! @fav_message, :id, :user_id, :fav_message_id

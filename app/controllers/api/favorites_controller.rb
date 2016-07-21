@@ -1,14 +1,14 @@
 class Api::FavoritesController < ApplicationController
   def index
-    @fav_messages = Favorites.all
-    render "api/favs/index"
+    @fav_messages = Favorite.all
+    render "api/favorites/index"
   end
 
   def create
-    @fav_message = Favorites.new(favs_params)
+    @fav_message = Favorite.new(fav_message_params)
     @fav_message.user_id = current_user.id
     if @fav_message.save
-      render "api/favs/show"
+      render :show
     else
       render(
         json: {
@@ -20,10 +20,10 @@ class Api::FavoritesController < ApplicationController
   end
 
   def destroy
-    @fav_message = Favorite.find(params[:id])
+    @fav_message = Favorite.find_by(fav_message_id: params[:id], user_id: current_user.id)
     if @fav_message.destroy
       @fav_messages = Favorite.all
-      render "api/favs/index"
+      render "api/favorites/index"
     else
       render(
         json: {
@@ -37,6 +37,6 @@ class Api::FavoritesController < ApplicationController
   private
 
   def fav_message_params
-    params.require(:favorites).permit(:fav_message_id)
+    params.require(:favorite).permit(:user_id, :fav_message_id)
   end
 end

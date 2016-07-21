@@ -1,7 +1,7 @@
 class Api::MessagesController < ApplicationController
   def index
     @room = Room.find(params[:room_id])
-    @messages = @room.messages.includes(:favorites)
+    @messages = @room.messages
     render "api/messages/index"
   end
 

@@ -13,9 +13,8 @@ const MessageActions = {
     MessageApiUtil.updateMessage(message, this.receiveSingleMessage);
   },
   deleteMessage(id) {
-    MessageApiUtil.deleteMessage(id, this.removeMessage);
+      MessageApiUtil.deleteMessage(id, this.removeMessage);
   },
-
   receiveRoomMessages(messages) {
     AppDispatcher.dispatch({
       actionType: MessageConstants.MESSAGES_RECEIVED,

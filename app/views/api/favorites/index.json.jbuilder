@@ -1,1 +1,1 @@
-json.array! @fav_messages, partial: 'api/favorites/fav_message', as: :fav_message
+json.array! @fav_messages, :id, :user_id, :fav_message_id
