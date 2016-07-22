@@ -22,14 +22,6 @@ FavoriteStore.findByUser = function(userId) {
   return _userFavorites;
 };
 
-// FavoriteStore.findFavorited = function(userId, favMessageId){
-//   Object.keys(_favorites).forEach( (favoriteId) => {
-//     if (_favorites[favoriteId].fav_message_id === favMessageId && _favorites[favoriteId].user_id === userId) {
-//       return _favorites[favoriteId];
-//     }
-//   });
-// };
-
 FavoriteStore.findFavorited = function(userId, favMessageId){
   let favorited;
   Object.keys(_favorites).forEach ( (key) => {

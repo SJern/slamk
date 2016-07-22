@@ -11,7 +11,9 @@ const MessageIndexItem = React.createClass({
       favorited: FavoriteStore.findFavorited(
         SessionStore.currentUser().id,
         this.props.message.id
-      )
+      ),
+      isFavorited: false,
+      favoriteText: ""
     };
   },
   componentDidMount(){
@@ -22,14 +24,42 @@ const MessageIndexItem = React.createClass({
     this.favoriteStoreListener.remove();
   },
   _favoriteChange(){
-    console.log(`All Favorites Length: ${FavoriteStore.all().length}`);
+    let buttonText = "☆";
+    let currentUser = SessionStore.currentUser();
+    if (this.state.favorited) {
+      buttonText = "★";
+    }
+
     this.setState({
-      favorites: FavoriteStore.all(),
+      favorites: FavoriteStore.findByUser(currentUser.id),
+      favorited: FavoriteStore.findFavorited(
+        currentUser.id,
+        this.props.message.id),
+      isFavorited: true,
+      favoriteText: buttonText
+    });
+
+  },
+  _onMessageChange(){
+    this.setState({
+      favorites: FavoriteStore.findByUser(SessionStore.currentUser().id),
       favorited: FavoriteStore.findFavorited(
         SessionStore.currentUser().id,
-        this.props.message.id
-      )
-    });
+        this.props.message.id),
+      });
+  },
+  _toggleFavorite(e){
+    e.preventDefault();
+    let currentUser = SessionStore.currentUser();
+    let message = this.props.message;
+    if (this.state.favoriteText === "☆"){
+      FavoriteActions.createFavorite({
+        user_id: currentUser.id,
+        fav_message_id: message.id});
+    } else {
+      FavoriteActions.deleteFavorite(this.state.favorited.id);
+    }
+    this.setState({favorites: FavoriteStore.findByUser(currentUser.id)});
   },
   _addFavorite(){
     let currentUser = SessionStore.currentUser();
@@ -61,14 +91,11 @@ const MessageIndexItem = React.createClass({
     return (
         <div>
           {info}
+          <div
+          className="favorite-button"
+          onClick={this._toggleFavorite}>{this.state.favoriteText}</div>
           {body}
-          <div
-          className="favorite-button"
-          onClick={this._addFavorite}>Add Favorite</div>
-          <div
-          className="favorite-button"
-          onClick={this._removeFavorite}>Remove Favorite</div>
-        </div>
+          </div>
     );
   }
 });

@@ -13,6 +13,10 @@ MessageStore.all = function() {
   return messages.sort((m1, m2) => new Date(m1.created_at) - new Date(m2.created_at));
 };
 
+MessageStore.find = function(messageId){
+  return _messages[messageId];
+};
+
 MessageStore.lastMessageUserId = function() {
   return _lastMessage.user_id;
 };
