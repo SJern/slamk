@@ -4,17 +4,20 @@ const FavoriteActions = require('../actions/favorite_actions');
 const SessionStore = require('../stores/session_store');
 const MessageStore = require('../stores/message_store');
 
+
+
 const Favorites = React.createClass({
   getInitialState(){
     return {favorites: []};
   },
   componentDidMount(){
-    this.favoriteStoreListener = FavoriteStore.addListener(this.onChange);
+    this.favoriteStoreListener = FavoriteStore.addListener(this._onChange);
+    FavoriteActions.fetchFavorites();
   },
   componentWillUnmount(){
     this.favoriteStoreListener.remove();
   },
-  onChange(){
+  _onChange(){
     let currentUser = SessionStore.currentUser();
     this.setState({favorites: FavoriteStore.findByUser(currentUser.id)});
   },
