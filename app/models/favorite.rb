@@ -7,5 +7,5 @@ class Favorite < ActiveRecord::Base
   primary_key: :id,
   foreign_key: :fav_message_id,
   class_name: 'Message'
-
+  
 end

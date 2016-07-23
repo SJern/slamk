@@ -6,7 +6,7 @@ const FavoriteActions = require('../actions/favorite_actions');
 const SessionStore = require('../stores/session_store');
 const MessageStore = require('../stores/message_store');
 
-
+const Favorites = require('./favorites');
 
 const styling = {
   root: {
@@ -80,7 +80,7 @@ var FavoriteSideBar = React.createClass({
     sidebarContent = (
       <ul>
       {this.props.favorites.forEach( favorite => {
-        return <li>Favorite #{favorite.id}</li>;
+        return <li>Favorites </li>;
       })}
       </ul>
     );
@@ -91,11 +91,10 @@ var FavoriteSideBar = React.createClass({
                sidebar={sidebarContent}
                open={this.state.sidebarOpen}
                onSetOpen={this.onSetSidebarOpen}
-               docked={true}
+               docked={false}
                transitions={true}
                pullRight={true}>
-        <b>Main content</b>
-        {sidebarContent}
+        <Favorites roomId={this.props.roomId}/>
       </Sidebar>
     );
   }

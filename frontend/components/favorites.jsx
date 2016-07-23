@@ -4,22 +4,28 @@ const FavoriteActions = require('../actions/favorite_actions');
 const SessionStore = require('../stores/session_store');
 const MessageStore = require('../stores/message_store');
 
+const FavoriteIndexItem = require('./favorite_index_item');
 
 
 const Favorites = React.createClass({
   getInitialState(){
-    return {favorites: []};
+    return {favorites: [], currentUser: ""};
   },
   componentDidMount(){
-    this.favoriteStoreListener = FavoriteStore.addListener(this._onChange);
+    this.favoriteStoreListener = FavoriteStore.addListener(this._onFavoriteChange);
     FavoriteActions.fetchFavorites();
+    this.sessionStoreListener = SessionStore.addListener(this.forceUpdate.bind(this));
   },
   componentWillUnmount(){
     this.favoriteStoreListener.remove();
+    this.sessionStoreListener.remove();
   },
-  _onChange(){
+  _onFavoriteChange(){
     let currentUser = SessionStore.currentUser();
-    this.setState({favorites: FavoriteStore.findByUser(currentUser.id)});
+    this.setState({
+      favorites: FavoriteStore.findByUser(currentUser.id),
+      currentUser: currentUser
+    });
   },
   render(){
     let content = (
@@ -31,7 +37,7 @@ const Favorites = React.createClass({
         <ul className="favorites-index">
         {this.state.favorites.map( (favorite) => {
           return (
-            <FavoriteIndexItem key={favorite.id} favorite={favorite} />
+            <FavoriteIndexItem key={favorite.id} favorite={favorite} roomId={this.props.roomId} />
           );
         })}
         </ul>
