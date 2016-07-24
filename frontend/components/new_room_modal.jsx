@@ -24,14 +24,14 @@ const NewRoomModal = React.createClass({
       <Tooltip id="tooltip">Start a {this.props.isChannel ? "new channel" : "private chat between some friends" } !</Tooltip>
     );
     return (
-      <div>
+      <div className=".add-button">
         <OverlayTrigger placement="top" overlay={tooltip}>
           <MdAddBox color="white" onClick={this.open} />
         </OverlayTrigger>
 
         <Modal show={this.state.showModal} onHide={this.close}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>Create a Room</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <NewRoomForm isChannel={this.props.isChannel} closeModal={this.close} />

@@ -1,0 +1,36 @@
+.welcome-container {
+  margin-bottom: 15px;
+}
+
+.welcome-header {
+  font-size: 1.5em;
+}
+
+.nav-menu {
+
+}
+
+.menu-title {
+  padding-right: 5px;
+}
+
+.channels-menu {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.add-button {
+  display: flex
+  align-self: center;
+}
+
+.channel-names {
+  display: flex;
+  padding-left: 10px;
+}
+
+.channel-title {
+  padding-right: 5px;
+}

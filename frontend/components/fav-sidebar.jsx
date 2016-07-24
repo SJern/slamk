@@ -10,18 +10,15 @@ const Favorites = require('./favorites');
 
 const FavoriteSideBar = React.createClass({
   getInitialState(){
-    return { hidden: true , buttonText: "Show Favorites"};
+    return { hidden: true , buttonText: "☆"};
   },
   togglePanel(e){
     e.preventDefault();
       if (this.state.hidden === true) {
-        this.setState({hidden: false, buttonText: "Hide Favorites"});
-    // $("#nav").stop().animate({marginTop:"-100px"}, 200);
+        this.setState({hidden: false, buttonText: "	★"});
       } else {
-        this.setState({hidden: true, buttonText: "Show Favorites"});
-    // $("#nav").stop().animate({marginTop:"0px"}, 200);
+        this.setState({hidden: true, buttonText: "☆"});
       }
-    // this.setState( {hidden: false} );
 },
   render: function() {
     let content;
@@ -33,8 +30,8 @@ const FavoriteSideBar = React.createClass({
       );
     }
     return (
-      <div>
-        <button onClick={this.togglePanel}>{this.state.buttonText}</button>
+      <div className="favorite-container">
+        <button className="favorite-star" onClick={this.togglePanel}>{this.state.buttonText}</button>
         {content}
       </div>
     );

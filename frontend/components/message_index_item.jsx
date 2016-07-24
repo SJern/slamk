@@ -66,9 +66,12 @@ const MessageIndexItem = React.createClass({
     let info, body;
     const message = this.props.message;
     if (!this.props.showMessageOnly) {
-      info = (<div>
-        <div><b>{message.username}</b></div>
-        <div>{(new Date(message.created_at)).toString().slice(4, 21)}</div>
+      info = (<div className="message-info">
+        <div className="message-username"><b>{message.username}</b></div>
+        <div className="message-date">{(new Date(message.created_at)).toString().slice(4, 21)}</div>
+        <button
+        className="favorite-button"
+        onClick={this._toggleFavorite}>{this.state.favoriteText}</button>
       </div>);
     }
     if (/^https:\/\/gist\.github\.com\//.test(message.body)) {
@@ -80,9 +83,6 @@ const MessageIndexItem = React.createClass({
     return (
         <div>
           {info}
-          <button
-          className="favorite-button"
-          onClick={this._toggleFavorite}>{this.state.favoriteText}</button>
           {body}
           </div>
     );

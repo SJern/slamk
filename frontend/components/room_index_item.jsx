@@ -34,8 +34,8 @@ const RoomIndexItem = React.createClass({
       );
     }
     return (
-        <div>
-          <div onClick={this.handleSelection.bind(null, this.props.room)}>
+        <div className="channel-names">
+          <div className="channel-title" onClick={this.handleSelection.bind(null, this.props.room)}>
           {room.channel ? '#' : '@'}{room.title}
           {(room.size > 2 && !room.channel) ? ',...' : ''}</div>
           {leaveButton}

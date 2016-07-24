@@ -37,11 +37,15 @@ const FavoriteIndexItem = React.createClass({
     let message = MessageStore.findFavorite(this.props.favorite.fav_message_id);
     if (message) {
       content =  (
-        <div>
-          <p>{message.username}</p>
-          <p>{message.body}</p>
-          <p>{message.created_at}</p>
-          <button onClick={this._removeFavorite}>★</button>
+        <div className="favorite-index-item">
+          <div className="favorite-username">{message.username}</div>
+          <div className="favorite-msg-info">
+          <div className="favorite-date">{(new Date(message.created_at)).toString().slice(4, 21)}</div>
+          <button
+            className="favorite-button"
+            onClick={this._removeFavorite}>★</button>
+          </div>
+          <div className="favorite-message">{message.body}</div>
         </div>
       );
     }

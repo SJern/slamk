@@ -29,7 +29,7 @@ const Favorites = React.createClass({
   },
   render(){
     let content = (
-      <div>You don't have any favorites</div>
+      <div className="no-favorites"> You don't have any favorited messages.</div>
     );
 
     if (this.state.favorites.length > 0) {
