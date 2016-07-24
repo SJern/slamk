@@ -14,16 +14,19 @@
   padding-right: 5px;
 }
 
+.menu-title:hover {
+  cursor: pointer;
+}
+
+.dm-menu-title {
+  padding-right: 5px;
+}
+
 .channels-menu {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   margin-top: 10px;
-}
-
-.add-button {
-  display: flex
-  align-self: center;
 }
 
 .channel-names {
@@ -33,4 +36,8 @@
 
 .channel-title {
   padding-right: 5px;
+}
+
+.channel-title:hover {
+  cursor: pointer;
 }
