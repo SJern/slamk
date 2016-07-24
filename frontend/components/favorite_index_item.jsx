@@ -7,12 +7,13 @@ const FavoriteActions = require('../actions/favorite_actions');
 const FavoriteIndexItem = React.createClass({
   getInitialState(){
     return {
-      messages: [],
-      favorites: []};
+      allmessages: [],
+      favorites: []
+    };
   },
   componentDidMount() {
     this.messageStoreListener = MessageStore.addListener(this._onChange);
-    MessageActions.fetchRoomMessages(this.props.roomId);
+    MessageActions.fetchMessages();
     this.favoriteStoreListener = FavoriteStore.addListener(this._onFavoriteChange);
     FavoriteActions.fetchFavorites();
   },
@@ -21,10 +22,10 @@ const FavoriteIndexItem = React.createClass({
     this.favoriteStoreListener.remove();
   },
   _onChange(){
-    this.setState({ messages: MessageStore.all()});
+    this.setState({ allmessages: MessageStore.allMessages()});
   },
   _onFavoriteChange(){
-    this.setState({ messages: MessageStore.all(), favorites: FavoriteStore.all()});
+    this.setState({ allmessages: MessageStore.allMessages(), favorites: FavoriteStore.all()});
   },
   _removeFavorite(e){
     e.preventDefault();
@@ -33,7 +34,7 @@ const FavoriteIndexItem = React.createClass({
   },
   render(){
     let content = "";
-    let message = MessageStore.find(this.props.favorite.fav_message_id);
+    let message = MessageStore.findFavorite(this.props.favorite.fav_message_id);
     if (message) {
       content =  (
         <div>

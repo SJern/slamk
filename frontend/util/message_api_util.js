@@ -1,4 +1,13 @@
 const MessageApiUtil = {
+  fetchMessages(success) {
+    $.ajax({
+      url: 'api/favorites/allmessages',
+      success,
+      error: function () {
+        console.log("error in MessageApiUtil#fetchMessages");
+      }
+    });
+  },
   fetchRoomMessages(room_id, success) {
     $.ajax({
       url: 'api/messages',
