@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :rooms,
   	through: :room_users,
   	source: :room
+  has_many :favorites, dependent: :destroy
 
   def password= password
   	self.password_digest = BCrypt::Password.create(password)

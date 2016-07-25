@@ -3,6 +3,9 @@ const MessageConstants = require('../constants/message_constants');
 const MessageApiUtil = require('../util/message_api_util');
 
 const MessageActions = {
+  fetchMessages() {
+    MessageApiUtil.fetchMessages(this.receiveMessages);
+  },
   fetchRoomMessages(room_id) {
     MessageApiUtil.fetchRoomMessages(room_id, this.receiveRoomMessages);
   },
@@ -13,9 +16,14 @@ const MessageActions = {
     MessageApiUtil.updateMessage(message, this.receiveSingleMessage);
   },
   deleteMessage(id) {
-    MessageApiUtil.deleteMessage(id, this.removeMessage);
+      MessageApiUtil.deleteMessage(id, this.removeMessage);
   },
-
+  receiveMessages(messages) {
+    AppDispatcher.dispatch({
+      actionType: MessageConstants.ALLMESSAGES_RECEIVED,
+      messages: messages
+    });
+  },
   receiveRoomMessages(messages) {
     AppDispatcher.dispatch({
       actionType: MessageConstants.MESSAGES_RECEIVED,

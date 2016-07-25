@@ -9,9 +9,9 @@ const Menu = React.createClass({
   },
   render() {
     return (
-      <div>
+      <div className="welcome-container">
         <h4>Parks and App::creation</h4>
-        <h3>Hi, {SessionStore.currentUser().username}</h3>
+        <h3 className="welcome-header">Hi, {SessionStore.currentUser().username}</h3>
         <button onClick={this.handleSignOut} >Sign out</button>
       </div>
     );

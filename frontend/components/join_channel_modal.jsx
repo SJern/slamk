@@ -26,12 +26,12 @@ const JoinChannelModal = React.createClass({
     return (
       <div>
         <OverlayTrigger placement="top" overlay={tooltip}>
-          <div onClick={this.open} >CHANNELS</div>
+          <div className="menu-title" onClick={this.open} >CHANNELS</div>
         </OverlayTrigger>
 
         <Modal show={this.state.showModal} onHide={this.close}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>Join a Channel</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <JoinChannelForm closeModal={this.close} />

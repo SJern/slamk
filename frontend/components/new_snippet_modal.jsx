@@ -31,7 +31,7 @@ const NewSnippetModal = React.createClass({
 
         <Modal show={this.state.showModal} onHide={this.close}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>Source Code Editor</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <NewSnippetForm roomId={this.props.roomId} closeModal={this.close} />

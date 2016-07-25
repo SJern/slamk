@@ -6,6 +6,8 @@ const Navigation = require('./navigation');
 const Room = require('./room');
 const RoomApiUtil = require('../util/room_api_util');
 
+const FavBar = require('./fav-sidebar');
+
 const Chat = React.createClass({
   getInitialState() {
     return { room: {id: 1} };
@@ -33,6 +35,7 @@ const Chat = React.createClass({
       <div id="client-ui">
         <Navigation room={this.state.room} />
         <Room room={this.state.room} />
+        <FavBar roomId={this.state.room.id} />
       </div>
     );
   }

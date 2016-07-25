@@ -5,6 +5,7 @@ const MessageConstants = require('../constants/message_constants');
 const MessageStore = new Store(AppDispatcher);
 
 let _messages = {};
+let _allmessages= {};
 let _lastMessage = {};
 
 MessageStore.all = function() {
@@ -13,9 +14,29 @@ MessageStore.all = function() {
   return messages.sort((m1, m2) => new Date(m1.created_at) - new Date(m2.created_at));
 };
 
+MessageStore.allMessages = function() {
+  const allmessages = [];
+  Object.keys(_allmessages).forEach(key => allmessages.push(_allmessages[key]));
+  return allmessages.sort((m1, m2) => new Date(m1.created_at) - new Date(m2.created_at));
+};
+
+MessageStore.findFavorite = function(messageId) {
+  return _allmessages[messageId];
+};
+
+MessageStore.find = function(messageId){
+  return _messages[messageId];
+};
+
 MessageStore.lastMessageUserId = function() {
   return _lastMessage.user_id;
 };
+
+function resetMessages(messages){
+  _allmessages = {};
+  messages.forEach(message => _allmessages[message.id] = message);
+  MessageStore.__emitChange();
+}
 
 function resetRoomMessages(messages) {
   _messages = {};
@@ -36,6 +57,9 @@ function removeSingleMessage(message) {
 
 MessageStore.__onDispatch = function(payload) {
   switch (payload.actionType) {
+    case MessageConstants.ALLMESSAGES_RECEIVED:
+      resetMessages(payload.messages);
+      break;
     case MessageConstants.MESSAGES_RECEIVED:
       resetRoomMessages(payload.messages);
       break;

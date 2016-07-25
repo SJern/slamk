@@ -5,6 +5,11 @@ class Api::MessagesController < ApplicationController
     render "api/messages/index"
   end
 
+  def allmessages
+    @messages = Message.all
+    render "api/messages/favorites.json.jbuilder"
+  end
+
   def create
     @message = Message.new(message_params)
     @message.user_id = current_user.id

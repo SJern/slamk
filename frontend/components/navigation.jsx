@@ -2,6 +2,7 @@ const React = require('react');
 const Menu = require('./menu');
 const RoomsIndex = require('./rooms_index');
 
+
 const Navigation = React.createClass({
   render() {
     return (
