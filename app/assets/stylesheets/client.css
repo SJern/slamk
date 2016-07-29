@@ -25,10 +25,17 @@ html, body, #content, #app {
   flex: 1 10%;
 }
 
-#msgs_scroller_div {
+#msgs_scroller_wrapper {
   overflow: scroll;
   flex: 1 86%;
   padding: 10px;
+}
+
+#msgs_scroller_div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 100%;
 }
 
 #messages-input-container {

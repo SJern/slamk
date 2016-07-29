@@ -76,7 +76,7 @@ const MessageIndexItem = React.createClass({
     }
     if (/^https:\/\/gist\.github\.com\//.test(message.body)) {
       const gistId = message.body.match(/\w+$/)[0];
-      body = <GistEmbed gistId={gistId}/>;
+      body = <GistEmbed scroll={this.props.scroll} gist={gistId}/>;
     } else {
       body = <div>{message.body}</div>;
     }
@@ -84,7 +84,7 @@ const MessageIndexItem = React.createClass({
         <div>
           {info}
           {body}
-          </div>
+        </div>
     );
   }
 });

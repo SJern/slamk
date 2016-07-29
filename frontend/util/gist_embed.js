@@ -1,56 +1,62 @@
-var React = require('react');
-var PropTypes = require('react/lib/ReactPropTypes');
+const React = require('react');
 
-// https://developer.zendesk.com/blog/rendering-to-iframes-in-react
-function adjustHeightWhenComplete(myFrame, myDoc) {
-  if(myDoc.readyState === 'complete') {
-    var content_height = myFrame.contentWindow.document.documentElement.scrollHeight;
-    myFrame.style.height = content_height + 'px';
-  } else {
-    // This will be continiously called until the iFrame is ready
-    setTimeout(function(){adjustHeightWhenComplete(myFrame, myDoc)});
-  }
-};
-
-// https://gist.github.com/jeremiahlee/1748966
-var GistEmbed = React.createClass({
-  displayName: 'GistEmbed',
+const GistEmbed = React.createClass({
   propTypes: {
-    gistId: PropTypes.string.isRequired
+    gist: React.PropTypes.string.isRequired,
+    file: React.PropTypes.string
   },
-  componentDidMount: function() {
 
-    // Create an iframe, append it to this document where specified
-    var gistFrame = document.createElement("iframe");
-    gistFrame.setAttribute("width", "100%");
-    gistFrame.id = "gistFrame" + this.props.gistId;
+  statics: {
+    gistCallbackId: 0,
+    nextGistCallback() {
+      return "embed_gist_callback_" + GistEmbed.gistCallbackId++;
+    },
 
-    var zone = document.getElementById("gistZone" + this.props.gistId);
-    zone.innerHTML = "";
-    zone.appendChild(gistFrame);
+    stylesheetAdded: false,
+    addStylesheet(href) {
+      if (!GistEmbed.stylesheetAdded) {
+        GistEmbed.stylesheetAdded = true;
+        var link = document.createElement('link');
+        link.type = "text/css";
+        link.rel = "stylesheet";
+        link.href = href;
 
-    // Create the iframe's document
+        document.head.appendChild(link);
+      }
+    }
+  },
 
-    var url = "https://gist.github.com/" + this.props.gistId + ".js";
-    var gistFrameHTML = '<html><body><script type="text/javascript" src=' + url + '></script></body></html>';
+  getInitialState() {
+    return { loading: true, src: "" };
+  },
 
-    // Set iframe's document with a trigger for this document to adjust the height
-    var gistFrameDoc = gistFrame.document;
+  componentDidMount() {
+    const gistCallback = GistEmbed.nextGistCallback();
+    window[gistCallback] = function(gist) {
+      if (this.isMounted()) {
+        this.setState({ loading: false,src: gist.div });
+        GistEmbed.addStylesheet(gist.stylesheet);
+        this.props.scroll();
+      }
+    }.bind(this);
 
-    if (gistFrame.contentDocument) {
-      gistFrameDoc = gistFrame.contentDocument;
-    } else if (gistFrame.contentWindow) {
-      gistFrameDoc = gistFrame.contentWindow.document;
+    let url = "https://gist.github.com/anonymous/" + this.props.gist + ".json?callback=" + gistCallback;
+    if (this.props.file) {
+      url += "&file=" + this.props.file;
     }
 
-    gistFrameDoc.open();
-    gistFrameDoc.writeln(gistFrameHTML);
-    gistFrameDoc.close();
-
-    adjustHeightWhenComplete(gistFrame, gistFrameDoc);
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = url;
+    document.head.appendChild(script);
   },
-  render: function() {
-    return React.DOM.div({id: 'gistZone' + this.props.gistId});
+
+  render() {
+    if (this.state.loading) {
+      return <div>loading...</div>;
+    } else {
+      return <div dangerouslySetInnerHTML={{__html: this.state.src}} />;
+    }
   }
 });
 
