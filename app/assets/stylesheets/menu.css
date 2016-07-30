@@ -24,14 +24,28 @@
 
 .channels-menu {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
   margin-top: 10px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px;
+  margin-left: 0;
+}
+
+.add-button {
+  margin-right: 15px;
 }
 
 .channel-names {
   display: flex;
   padding-left: 10px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px;
+  margin-left: 0;
+}
+
+.delete-button {
+  margin-right: 15px;
 }
 
 .channel-title {

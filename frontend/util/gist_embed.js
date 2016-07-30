@@ -55,7 +55,7 @@ const GistEmbed = React.createClass({
     if (this.state.loading) {
       return <div>loading...</div>;
     } else {
-      return <div dangerouslySetInnerHTML={{__html: this.state.src}} />;
+      return <div className="gistEmbed" dangerouslySetInnerHTML={{__html: this.state.src}} />;
     }
   }
 });

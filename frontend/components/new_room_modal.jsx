@@ -24,7 +24,7 @@ const NewRoomModal = React.createClass({
       <Tooltip id="tooltip">Start a {this.props.isChannel ? "new channel" : "private chat between some friends" } !</Tooltip>
     );
     return (
-      <div className=".add-button">
+      <div className="add-button">
         <OverlayTrigger placement="top" overlay={tooltip}>
           <MdAddBox color="white" onClick={this.open} />
         </OverlayTrigger>

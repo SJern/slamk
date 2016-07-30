@@ -29,7 +29,9 @@ const RoomIndexItem = React.createClass({
     if (room.title !== "general") {
       leaveButton = (
         <OverlayTrigger placement="right" overlay={tooltip}>
-          <TiDelete color="white" onClick={this.leaveRoom.bind(null, room)} />
+          <div className="delete-button">
+            <TiDelete color="white" onClick={this.leaveRoom.bind(null, room)} />
+          </div>
         </OverlayTrigger>
       );
     }

@@ -69,16 +69,27 @@ const MessageIndexItem = React.createClass({
       info = (<div className="message-info">
         <div className="message-username"><b>{message.username}</b></div>
         <div className="message-date">{(new Date(message.created_at)).toString().slice(4, 21)}</div>
-        <button
-        className="favorite-button"
-        onClick={this._toggleFavorite}>{this.state.favoriteText}</button>
       </div>);
     }
     if (/^https:\/\/gist\.github\.com\//.test(message.body)) {
       const gistId = message.body.match(/\w+$/)[0];
-      body = <GistEmbed scroll={this.props.scroll} gist={gistId}/>;
+      body = (
+        <div className="message-body">
+          <button
+          className="favorite-button"
+          onClick={this._toggleFavorite}>{this.state.favoriteText}</button>
+          <GistEmbed scroll={this.props.scroll} gist={gistId}/>
+        </div>
+      );
     } else {
-      body = <div>{message.body}</div>;
+      body = (
+        <div className="message-body">
+          <button
+          className="favorite-button"
+          onClick={this._toggleFavorite}>{this.state.favoriteText}</button>
+          <div>{message.body}</div>
+        </div>
+      );
     }
     return (
         <div>
