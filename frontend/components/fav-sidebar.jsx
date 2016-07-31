@@ -1,5 +1,4 @@
 var React = require('react');
-var Sidebar = require('react-sidebar').default;
 
 const FavoriteStore = require('../stores/favorite_store');
 const FavoriteActions = require('../actions/favorite_actions');
