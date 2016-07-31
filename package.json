@@ -34,6 +34,7 @@
     "react-icons": "^2.2.0",
     "react-router": "^2.5.1",
     "react-select": "^1.0.0-beta13",
+    "tether-shepherd": "^1.8.0",
     "webpack": "^1.13.1"
   },
   "engines": {
