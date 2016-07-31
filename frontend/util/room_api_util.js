@@ -1,5 +1,4 @@
 const SessionStore = require('../stores/session_store');
-const RoomActions = require('../actions/room_actions');
 
 const RoomApiUtil = {
   fetchJoinedRooms(success) {
@@ -18,12 +17,12 @@ const RoomApiUtil = {
     });
   },
   createRoom(room, userIds, success, error) {
-    const self = this;
     $.ajax({
       url: 'api/rooms',
       method: 'POST',
       data: { room },
       success(room) {
+        const RoomActions = require('../actions/room_actions');
         RoomActions.addRoomMember(room.id, SessionStore.currentUser().id);
         success(room);
         if (userIds.length) {

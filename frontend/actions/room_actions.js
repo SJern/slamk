@@ -1,6 +1,7 @@
 const AppDispatcher = require('../dispatcher/dispatcher');
 const RoomConstants = require('../constants/room_constants');
 const ErrorActions = require('./error_actions');
+const RoomApiUtil = require('../util/room_api_util');
 
 const RoomActions = {
   fetchJoinedRooms() {

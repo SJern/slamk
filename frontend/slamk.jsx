@@ -26,12 +26,6 @@ const appRouter = (
   </Router>
 );
 
-
-
-window.RoomApiUtil = require('./util/room_api_util');
-
-
-
 document.addEventListener('DOMContentLoaded', () => {
   if (window.currentUser) {
     SessionActions.receiveCurrentUser(window.currentUser);

@@ -1,12 +1,14 @@
 .favorite-container {
+  display: flex;
+  flex-direction: column;
   font-family: 'Lato', sans-serif;
   height: calc(100% - 60px);
   padding: 5px 0 5px 10px;
-  /*text-align: right;*/
   overflow-y: scroll;
 }
 
 .favorite-star {
+  align-self: flex-end;
   font-family: 'Lato', sans-serif;
   padding-right: 10px;
   font-size: 2em;
