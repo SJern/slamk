@@ -36,7 +36,7 @@ var MultiSelectField = React.createClass({
 
 	render () {
 		return (
-			<Select multi simpleValue value={this.state.value} placeholder="Add user(s) to the room" options={this.state.options} onChange={this.handleSelectChange} />
+			<Select multi simpleValue value={this.state.value} placeholder="Add one or more user(s) to the room" options={this.state.options} onChange={this.handleSelectChange} />
 		);
 	}
 });

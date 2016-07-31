@@ -23,6 +23,7 @@ const NewRoomModal = React.createClass({
     const tooltip = (
       <Tooltip id="tooltip">Start a {this.props.isChannel ? "new channel" : "private chat between some friends" } !</Tooltip>
     );
+    const formTitle = (this.props.isChannel) ? "Open a New Channel" : "Start a Direct Message";
     return (
       <div className="add-button">
         <OverlayTrigger placement="top" overlay={tooltip}>
@@ -31,7 +32,7 @@ const NewRoomModal = React.createClass({
 
         <Modal show={this.state.showModal} onHide={this.close}>
           <Modal.Header closeButton>
-            <Modal.Title>Create a Room</Modal.Title>
+            <Modal.Title>{formTitle}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <NewRoomForm isChannel={this.props.isChannel} closeModal={this.close} />

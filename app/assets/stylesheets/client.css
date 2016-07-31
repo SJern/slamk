@@ -21,10 +21,6 @@ html, body, #content, #app {
   flex: 1;
 }
 
-.channel_header {
-  flex: 1 10%;
-}
-
 #msgs_scroller_wrapper {
   overflow: scroll;
   flex: 1;
@@ -45,6 +41,19 @@ html, body, #content, #app {
   z-index: 1;
   position: absolute;
   bottom: 0px;
+}
+
+#messages-input-container .input-group-addon {
+  cursor: pointer;
+}
+
+.snippet-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-end-submit {
+  align-self: center;
 }
 
 .input-group-addon div {

@@ -57,10 +57,9 @@ const NewSnippetForm = React.createClass({
 
 	render() {
 		return (
-			<form onSubmit={this.handleSubmit}>
+			<form className="snippet-form" onSubmit={this.handleSubmit}>
 				<FormGroup controlId="formControlsText">
-					<ControlLabel>Text</ControlLabel>
-					<FormControl type="text" placeholder="Enter the filename with an extension here" value={this.state.fileName} onChange={this.update("fileName")} />
+					<FormControl type="text" placeholder="Name the file here, e.g., example.js" value={this.state.fileName} onChange={this.update("fileName")} />
 				</FormGroup>
 				<AceEditor
 					mode="javascript"
@@ -70,9 +69,11 @@ const NewSnippetForm = React.createClass({
 					name="UNIQUE_ID_OF_DIV"
 					editorProps={{$blockScrolling: true}}
 				/>
-				<Button type="submit">
-					Send
-				</Button>
+				<div className="flex-end-submit">
+					<Button type="submit">
+						Send
+					</Button>
+				</div>
 			</form>
 		);
 	}

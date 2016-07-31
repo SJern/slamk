@@ -85,18 +85,19 @@ const LoginForm = React.createClass({
     if (!this.props.isChannel) {
 			extraFields = (
 				<FormGroup controlId="formControlsSelectMultiple">
-					<ControlLabel>Multiple select</ControlLabel>
+					<ControlLabel>Add People</ControlLabel>
 					<MultiSelectField />
 				</FormGroup>
 			);
     }
+    const name = (this.props.isChannel) ? "Channel Name" : "Room Name";
 
 		return (
 			<div>
 				<form onSubmit={this.handleSubmit}>
 					<FormGroup controlId="formControlsTitle">
-						<ControlLabel>Room Title</ControlLabel>
-						<FormControl type="text" placeholder="Enter Title" value={this.state.title} onChange={this.update("title")} />{ this.fieldErrors("title") }
+						<ControlLabel>{name}</ControlLabel>
+						<FormControl type="text" placeholder="Enter name" value={this.state.title} onChange={this.update("title")} />{ this.fieldErrors("title") }
 					</FormGroup>
 
 					{extraFields}

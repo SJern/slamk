@@ -46,7 +46,7 @@ const MessagesIndex = React.createClass({
         <div id="msgs_scroller_div">
           {this.state.messages.map((message, idx) => {
             const showMessageOnly = (idx && (this.state.messages[idx - 1].user_id === message.user_id));
-            return <MessageIndexItem scroll={this.scrollToBottom.bind(this)} message={message}
+            return <MessageIndexItem scroll={this.scrollToBottom} message={message}
               showMessageOnly={showMessageOnly} key={message.id} />;
           })}
         </div>

@@ -33,6 +33,7 @@
 
 .add-button {
   margin-right: 15px;
+  cursor: pointer;
 }
 
 .channel-names {
@@ -46,6 +47,7 @@
 
 .delete-button {
   margin-right: 15px;
+  cursor: pointer;
 }
 
 .channel-title {

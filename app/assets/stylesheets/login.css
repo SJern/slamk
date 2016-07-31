@@ -27,8 +27,22 @@
   font-family: 'Lato', sans-serif;
   font-size: 21px;
 }
-.form-control {
+#messages-input-container .form-control {
   margin-left: -12px;
+}
+
+#formControlsTitle.form-control {
+  width: calc(100% - 26px);
+  height: 22px;
+}
+
+#formControlsText.form-control {
+  width: calc(100% - 26px);
+  height: 22px;
+}
+
+.ace_editor {
+  width: 100% !important;
 }
 
 #log-in-inputs {
