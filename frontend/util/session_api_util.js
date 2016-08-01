@@ -34,15 +34,7 @@ const SessionApiUtil = {
 			data: { user },
 			success(user) {
 				success(user);
-				$.ajax({
-					url: 'api/room_users',
-					method: 'POST',
-					data: {room_user: {room_id: 1}},
-					success(room) {
-						RoomActions.receiveSingleRoom(room);
-					},
-					error() {console.log("Join room error under SessionApiUtil#signUp");}
-				});
+				[7, 6, 5, 4, 3, 2, 1].forEach(roomId => RoomActions.joinRoom(roomId));
 			},
 			error(xhr) {
 				const errors = xhr.responseJSON;
@@ -57,7 +49,7 @@ const SessionApiUtil = {
 			dataType: 'json',
 			success(user) {
 				success(user);
-				[2, 1].forEach(roomId => RoomActions.joinRoom(roomId));
+				[7, 6, 5, 4, 3, 2, 1].forEach(roomId => RoomActions.joinRoom(roomId));
 			},
 			error(xhr) {
 				const errors = xhr.responseJSON;
