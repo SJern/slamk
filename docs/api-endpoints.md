@@ -1,6 +1,6 @@
 # API Endpoints
 
-## HTML API
+## JSON API
 
 ### Root
 
@@ -8,46 +8,47 @@
 
 ### Users
 
-- `GET /users/new`
-- `POST /users`
-- `PATCH /users`
+- `GET /api/users`
+- `GET /api/guest`
+  - creates demo users with random star wars character names
+- `POST /api/user`
 
 ### Session
 
-- `GET /session/new`
-- `POST /session`
-- `DELETE /session`
+- `GET /api/session`
+- `POST /api/session`
+- `DELETE /api/session`
 
-## JSON API
+### Rooms
 
-### Notes
+- `GET /api/rooms/:title`
+  - loads room by title
+- `GET /api/channels/joinable`
+  - find rooms (channels only) that user hasn't joined yet
+- `GET /api/rooms`
+- `POST /api/rooms`
+- `PATCH /api/rooms/:id`
+- `DELETE /api/rooms/:id`
 
-- `GET /api/notes`
-  - Notes index/search
-  - accepts `tag_name` query param to list notes by tag
-  - accepts pagination params (if I get there)
-- `POST /api/notes`
-- `GET /api/notes/:id`
-- `PATCH /api/notes/:id`
-- `DELETE /api/notes/:id`
+### RoomUsers
 
-### Notebooks
+- `POST /api/room_users/add`
+  - add other users to direct-message rooms
+- `POST /api/room_users`
+  - join oneself to any authorized room
+- `DELETE /api/room_users/:id`
 
-- `GET /api/notebooks`
-- `POST /api/notebooks`
-- `GET /api/notebooks/:id`
-- `PATCH /api/notebooks/:id`
-- `DELETE /api/notebooks/:id`
-- `GET /api/notebooks/:id/notes`
-  - index of all notes for a notebook
-  - accepts pagination params (if I get there)
+### Messages
 
-### Tags
+- `GET /api/favorites/allmessages`
+  - loads user's favorite messages
+- `GET /api/messages`
+- `POST /api/messages`
+- `PATCH /api/messages/:id`
+- `DELETE /api/messages/:id`
 
-- A note's tags will be included in the note show template
-- `GET /api/tags`
-  - includes query param for typeahead suggestions
-- `POST /api/notes/:note_id/tags`: add tag to note by name
-  - if note doesn't already exist, it will be created
-- `DELETE /api/notes/:note_id/tags/:tag_name`: remove tag from note by
-  name
+### Favorites
+
+- `GET /api/favorites`
+- `POST /api/favorites`
+- `DELETE /api/favorites/:id`

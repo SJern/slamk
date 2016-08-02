@@ -24,7 +24,7 @@ Slamk is a web application inspired by Slack that will be built using Ruby on Ra
 - [x] CSS styling that is satisfactorily visually appealing
 
 ![channel]
-[channel]: ./docs/wireframes/chat.png
+[channel]: wireframes/chat.png
 
 ## Design Docs
 * [View Wireframes][views]
@@ -33,11 +33,11 @@ Slamk is a web application inspired by Slack that will be built using Ruby on Ra
 * [API endpoints][api-endpoints]
 * [DB schema][schema]
 
-[views]: docs/views.md
-[components]: docs/components.md
-[flux-cycles]: docs/flux-cycles.md
-[api-endpoints]: docs/api-endpoints.md
-[schema]: docs/schema.md
+[views]: views.md
+[components]: components.md
+[flux-cycles]: flux-cycles.md
+[api-endpoints]: api-endpoints.md
+[schema]: schema.md
 
 ## Implementation Timeline
 
