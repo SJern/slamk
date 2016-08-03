@@ -16,6 +16,7 @@ class Api::RoomUsersController < ApplicationController
     @user = User.find_by(id: room_user_params[:user_id])
     authorized = this_is_a_new(@room) || @room.users.include?(current_user)
     if @room && @user && authorized && @room_user.save
+      Pusher.trigger("user_#{@user.id}", 'added_to_room', @room)
       render "api/rooms/show"
     else
       render json: @room_user.errors, status: 418

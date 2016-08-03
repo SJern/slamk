@@ -2,6 +2,7 @@ const React = require('react');
 const ReactRouter = require('react-router');
 const hashHistory = ReactRouter.hashHistory;
 
+const SessionStore = require('../stores/session_store');
 const RoomStore = require('../stores/room_store');
 const RoomActions = require('../actions/room_actions');
 const RoomIndexItem = require('./room_index_item');
@@ -16,12 +17,20 @@ const RoomsIndex = React.createClass({
   componentDidMount() {
     this.roomsListener = RoomStore.addListener(this.handleChange);
     RoomActions.fetchJoinedRooms();
+    this.pusher = new Pusher('0d04cf841bc3ee166b79', {
+      encrypted: true
+    });
+    let channel = this.pusher.subscribe(`user_${SessionStore.currentUser().id}`);
+    channel.bind('added_to_room', function(room) {
+      RoomActions.receiveSingleRoom(room);
+    });
   },
   handleChange() {
     this.setState({ rooms: RoomStore.all() });
   },
   componentWillUnmount() {
     this.roomsListener.remove();
+    this.pusher.unsubscribe(`user_${SessionStore.currentUser().id}`);
   },
 
   render() {

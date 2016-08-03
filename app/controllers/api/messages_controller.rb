@@ -17,7 +17,7 @@ class Api::MessagesController < ApplicationController
       Pusher.trigger("room_#{@message.room_id}", 'message_created', {
         message: @message,
         username: current_user.username
-        })
+      })
       render "api/messages/show"
     else
       render json: @message.errors, status: 418
