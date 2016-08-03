@@ -16,10 +16,11 @@ const MessagesIndex = React.createClass({
     this.pusher = new Pusher('0d04cf841bc3ee166b79', {
       encrypted: true
     });
-    var channel = this.pusher.subscribe(`room_${this.props.roomId}`);
-    const self = this;
+    let channel = this.pusher.subscribe(`room_${this.props.roomId}`);
     channel.bind('message_created', function(data) {
-      MessageActions.receiveSingleMessage(data);
+      const message = data.message;
+      message.username = data.username
+      MessageActions.receiveSingleMessage(message);
     });
   },
   componentDidUpdate: function() {
@@ -28,6 +29,13 @@ const MessagesIndex = React.createClass({
   },
   componentWillReceiveProps(nextProps) {
     MessageActions.fetchRoomMessages(nextProps.roomId);
+    this.pusher.unsubscribe(`room_${this.props.roomId}`);
+    let channel = this.pusher.subscribe(`room_${nextProps.roomId}`);
+    channel.bind('message_created', function(data) {
+      const message = data.message;
+      message.username = data.username
+      MessageActions.receiveSingleMessage(message);
+    });
   },
   componentWillUnmount() {
     this.messagesListener.remove();

@@ -25,16 +25,6 @@ development:
   <<: *default
   database: slamk_development
 
-#TODO for new database
-# $.ajax({
-#   url: 'api/rooms',
-#   method: 'POST',
-#   data: {room: {title:'general', channel: true}},
-#   success(){console.log('hi there')},
-#   error(){console.log('oops')}
-# });
-
-
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
