@@ -13,7 +13,7 @@ const MultiSelectField = require('./multi_select_field');
 const SelectionStore = require('../stores/selection_store');
 const SelectionActions = require('../actions/selection_actions');
 
-const LoginForm = React.createClass({
+const NewRoomForm = React.createClass({
   getInitialState() {
     return {title: "", userIds: []};
   },
@@ -111,4 +111,4 @@ const LoginForm = React.createClass({
 	}
 });
 
-module.exports = LoginForm;
+module.exports = NewRoomForm;

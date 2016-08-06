@@ -34,7 +34,7 @@ const GistEmbed = React.createClass({
     const gistCallback = GistEmbed.nextGistCallback();
     window[gistCallback] = function(gist) {
       if (this.isMounted()) {
-        this.setState({ loading: false,src: gist.div });
+        this.setState({ loading: false, src: gist.div });
         GistEmbed.addStylesheet(gist.stylesheet);
         this.props.scroll();
       }
