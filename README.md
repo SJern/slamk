@@ -23,8 +23,8 @@ Special thanks to [veechau][veechau] for contributing to the project. Users can 
 ![instant_snippet]
 [instant_snippet]: docs/images/instant_snippet.gif
 Slamk was built using the Pusher WebSocket API, so everything is real-time. It works for both new messages and new rooms. If I'm added to a room by a friend, that room will be added to my `RoomStore` immediately:
-```
-# ./app/controllers/api/room_users_controller.rb line 18
+```javascript
+// ./app/controllers/api/room_users_controller.rb line 18
 if @room && @user && authorized && @room_user.save
   Pusher.trigger("user_#{@user.id}", 'added_to_room', @room)
 
@@ -46,7 +46,7 @@ Unfortunately, new messages don't work as simple as that. To give the `MessagesI
 ![message_index_item_display]
 [message_index_item_display]: docs/images/message_index_item_display.png
 And `MessageIndexItem` needs `username` to do the rendering:
-```
+```javascript
 // ./frontend/components/message_index_item.jsx line 69
 info = (<div className="message-info">
   <div className="message-username"><b>{message.username}</b></div>
@@ -54,7 +54,7 @@ info = (<div className="message-info">
 </div>);
 ```
 Usually, the way to achieve that is to use Jbuilder:
-```
+```ruby
 # ./app/views/api/messages/_message.json.jbuilder
 json.extract! message, :id, :created_at, :user_id, :body
 json.username message.user.username
@@ -64,7 +64,7 @@ Here is the problem. Any new message my friend sends to my `MessageStore` won't 
 "Websocketed" messages cannot use Jbuilder to define the `username` attribute.
 ##### Solution:
 Instead of providing the Pusher WebSocket API with just the instance variable `@message`, we can actually provide it with a Ruby Hash:
-```
+```ruby
 # ./app/controllers/api/messages_controller.rb line 16
 if @message.save
   Pusher.trigger("room_#{@message.room_id}", 'message_created', {
@@ -73,7 +73,7 @@ if @message.save
   })
 ```
 And then, deconstruct to reconstruct on the front-end JavaScript side:
-```
+```javascript
 // ./frontend/components/messages_index.jsx line 20
 channel.bind('message_created', function(data) {
   const message = data.message;
@@ -82,7 +82,7 @@ channel.bind('message_created', function(data) {
 });
 ```
 Note that we are forgetting something here. There is another thing about messages that makes them different. The `Room` and `MessagesIndex` components do not unmount or remount when switching between different rooms. If we only subscribe to a websocket channel when `componentDidMount`, we will stay listening to that same websocket channel even after we switch to a different room. It's okay, we can make a minor tweak:
-```
+```javascript
 // ./frontend/components/messages_index.jsx line 32
 componentWillReceiveProps(nextProps) {
   this.pusher.unsubscribe(`room_${this.props.roomId}`);
@@ -94,7 +94,7 @@ componentWillReceiveProps(nextProps) {
 ![editor]
 [editor]: docs/images/editor.png
 The source code snippet feature has been Integrated by making jQuery AJAX requests to GitHub's API:
-```
+```javascript
 // ./frontend/components/new_snippet_form.jsx line 40
 $.ajax({
   url: 'https://api.github.com/gists',
@@ -109,7 +109,7 @@ $.ajax({
   }),
 ```
 When GitHub has successfully created the gist/snippet, it's going to send us back a JSON file with a whole bunch of data, but we are only interested in its html_url:
-```
+```javascript
 success(res) { MessageActions.createMessage({
   body: res.html_url,
   room_id: self.props.roomId
@@ -122,7 +122,7 @@ But when should we close `NewSnippetModal`'s modal? A modal should close only wh
 Friendship in jeopardy.
 ##### Solution:
 A normal modal-closing pattern is not going to cut it. Let's not ruin any more friendship and make a minor adjustment to the `MessageStore` by creating a private variable `_lastMessage`. We can now check to see if a new message is our own before closing our modal:
-```
+```javascript
 // ./frontend/components/new_snippet_form.jsx line 23
 closeModalOnSuccess() {
   if (SessionStore.currentUser().id === MessageStore.lastMessageUserId()) {
@@ -131,7 +131,7 @@ closeModalOnSuccess() {
 },
 ```
 Chatroom messages should always populate from bottom to top. This is simple enough to implement for normal messages. Whenever `MessagesIndex` updates with any new message:
-```
+```javascript
 // ./frontend/components/messsages_index.jsx line 26
 componentDidUpdate: function() {
   const node = ReactDOM.findDOMNode(this);
@@ -139,7 +139,7 @@ componentDidUpdate: function() {
 },
 ```
 However, this alone wouldn't work for the gist-messages. The decision to store only the url of the gist is great because we are storing only what is necessary into our database, but this does pose a problem with the timing of scrolling. With only the gist url at our disposal, we will create some HTML elements by dynamically loading external JavaScript files:
-```
+```javascript
 // ./frontend/util/gist_embed.js line 43
 let url = "https://gist.github.com/anonymous/" + this.props.gist + ".json?callback=" + gistCallback;
 const script = document.createElement('script');
@@ -158,7 +158,7 @@ MessageStore receives new gist-message
 ```
 ##### Solution:
 Okay, let's add a `scrollToBottom` function to `MessagesIndex` and pass it down to its grandchild `GistEmbed` as a prop:
-```
+```javascript
 // ./frontend/components/messsages_index.jsx line 47
 scrollToBottom() {
   const node = ReactDOM.findDOMNode(this);
@@ -169,7 +169,7 @@ scrollToBottom() {
 <GistEmbed scroll={this.props.scroll} gist={gistId}/>
 ```
 Now, `GistEmbed` has access to `scrollToBottom`, but when should it run it? `componentDidMount`? WillMount? WillReceiveProps? The div would still be empty and any scrolling would be meaningless. How about only after the innerHTML has been set?
-```
+```javascript
 // ./frontend/util/gist_embed.js line 35
 window[gistCallback] = function(gist) {
   if (this.isMounted()) {
@@ -188,7 +188,7 @@ Voilà~
 Remember when we decided to make `NewSnippetModal`'s child `NewSnippetForm` listen to `MessageStore` and decide when to close the modal? Why don't we have the parent listen to the store instead? Well, the parent `NewSnippetModal` is always mounted even after the actual modal is closed. Therefore, if `NewSnippetModal` only removes the listener to `MessageStore` when `componentWillUnmount`, `MessageStore` will keep invoking `this.close` whenever change is emitted -- even when the actual modal is not open!
 
 Unlike the `NewSnippetModal`, `NewSnippetForm` mounts and unmounts at better timing, therefore is a better candidate to determine when `closeModal` should be invoked by the `RoomStore`:
-```
+```javascript
 // ./frontend/components/new_snippet_modal.jsx line 37
 <NewSnippetForm roomId={this.props.roomId} closeModal={this.close} />
 
@@ -201,7 +201,7 @@ componentWillUnmount() {
 },
 ```
 `NewSnippetModal` can pass the `closeModal` prop to its child `NewSnippetForm`, but what if a child wants to pass something up to its parent? For example, we can add multiple team members to a direct-message room. `MultiSelectField` is a child of `NewRoomForm`. Whenever a user updates the list of other users to add to the room in `MultiSelectField`, `NewRoomForm` needs to have access to the updated list. Well, we can setup a `SelectionStore` that the parent can listen to. We then can kick off the Flux cycle whenever there is a change, as shown below:
-```
+```javascript
 // ./frontend/components/multi_select_field.jsx line 26
 handleSelectChange (value) {
   let ids;
@@ -221,7 +221,7 @@ handleSelectChange (value) {
 Slamk has all the CRUD (Create, Read, Update, and Delete) functionality for messages, rooms and so on. For example, we can create direct-message rooms and add team members to the room as discussed above. We can leave or destroy a room. We can also create a open channel or join one.
 
 `JoinChannelForm` only shows a list of rooms that are "joinable". Direct-message rooms are *not* joinable. Channels that the user has already joined are also not joinable. We could do a query for all the rooms, do another query for the rooms the user has already joined, and then do some Ruby `#select`ing and `#reject`ing, but that would be so inefficient. Let's write a raw SQL query:
-```
+```ruby
 # ./app/controllers/api/rooms_controller.rb line 7
 def joinable
   @channels = Room.find_by_sql([<<-SQL, current_user.id, true])
@@ -250,20 +250,20 @@ Beautifully CRUDing it!
 ### Is This User Authorized?
 
 To protect the database, on the back-end, `RoomUsersController` makes sure the room a user is trying to join is not a private direct-message room, before letting him/her join it:
-```
+```ruby
 # ./app/controllers/api/room_users_controller.rb line 6
 if @room && @room.channel && @room_user.save
   render "api/rooms/show"
 ```
 `RoomUsersController` also makes sure a user is the creator or a member of a direct-message room, before letting that user add any other users to the room:
-```
+```ruby
 # ./app/controllers/api/room_users_controller.rb line 17
 authorized = this_is_a_new(@room) || @room.users.include?(current_user)
 if @room && @user && authorized && @room_user.save
   Pusher.trigger("user_#{@user.id}", 'added_to_room', @room)
 ```
 Since the `ReactRouter` switches between rooms based on the `Route` path -- `/messages/:roomTitle` in our case. RoomsController makes sure the room with the `:roomTitle` indeed has such a member, or is the #general room, which everyone is a member of:
-```
+```ruby
 # ./app/controllers/api/rooms_controller.rb line 36
 @room = Room.find_by(title: params[:room_title])
 if @room && (general?(@room) || a_member_of(@room))
